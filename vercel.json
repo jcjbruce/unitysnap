@@ -3,7 +3,6 @@
   "outputDirectory": "dist",
   "installCommand": "pnpm install",
   "rewrites": [
-    { "source": "/proposals/(.*)", "destination": "/proposals/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/((?!proposals).*)", "destination": "/index.html" }
   ]
 }
