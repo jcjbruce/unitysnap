@@ -7,6 +7,12 @@
     { "source": "/proposals/bcfc", "destination": "/proposals/BCFC/index.html", "permanent": true },
     { "source": "/proposals/bcfc/", "destination": "/proposals/BCFC/index.html", "permanent": true },
     { "source": "/proposals/bcfc/index.html", "destination": "/proposals/BCFC/index.html", "permanent": true },
-    { "source": "/proposals/bcfc/:path*", "destination": "/proposals/BCFC/:path*", "permanent": true }
+    { "source": "/proposals/bcfc/boulder-film", "destination": "/proposals/BCFC/boulder-film/index.html", "permanent": true },
+    { "source": "/proposals/bcfc/boulder-film/", "destination": "/proposals/BCFC/boulder-film/index.html", "permanent": true },
+    { "source": "/proposals/bcfc/boulder-film/:path*", "destination": "/proposals/BCFC/boulder-film/:path*", "permanent": true },
+    { "source": "/proposals/Bcfc/:path*", "destination": "/proposals/BCFC/:path*", "permanent": true },
+    { "source": "/proposals/Bcfc", "destination": "/proposals/BCFC/index.html", "permanent": true },
+    { "source": "/proposals/BcFc/:path*", "destination": "/proposals/BCFC/:path*", "permanent": true },
+    { "source": "/proposals/BcFc", "destination": "/proposals/BCFC/index.html", "permanent": true }
   ]
 }
