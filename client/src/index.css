@@ -41,9 +41,9 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Typography — serif display + clean sans body */
-  --font-display: 'Lora', Georgia, serif;
-  --font-body: 'DM Sans', sans-serif;
+  /* Typography — single clean typeface */
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
 
   /* Warm deep forest green for dark sections */
   --color-navy: oklch(0.20 0.05 155);
@@ -175,12 +175,9 @@
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.025em;
   }
-  /* Ensure nav, buttons, labels stay sans-serif */
-  nav, button, a, span, label, input, textarea, select {
-    font-family: var(--font-body);
-  }
+
 }
 
 @layer components {
@@ -223,7 +220,6 @@
     background-color: oklch(0.45 0.14 150);
     color: white;
     padding: 0.75rem 1.75rem;
-    font-family: var(--font-body);
     font-weight: 600;
     font-size: 0.875rem;
     letter-spacing: 0.01em;
@@ -244,7 +240,6 @@
     border: 1.5px solid oklch(0.45 0.14 150);
     color: oklch(0.45 0.14 150);
     padding: 0.75rem 1.75rem;
-    font-family: var(--font-body);
     font-weight: 600;
     font-size: 0.875rem;
     letter-spacing: 0.01em;
@@ -266,7 +261,6 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: oklch(0.72 0.12 75);
-    font-family: var(--font-body);
   }
 }
 
