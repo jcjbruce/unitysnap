@@ -7,7 +7,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const CTA_BG = "/images/contact-bg.jpg";
+const CTA_BG = "/images/mission-community.jpg";
 
 export default function Contact() {
   const ref = useRef(null);

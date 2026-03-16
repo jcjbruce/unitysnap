@@ -14,7 +14,7 @@ export default function MissionCTA() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative py-28 md:py-40 overflow-hidden">
+    <section className="relative py-32 md:py-48 overflow-hidden">
       {/* Background photo — full bleed */}
       <div
         className="absolute inset-0 bg-cover bg-bottom bg-no-repeat"
@@ -27,10 +27,10 @@ export default function MissionCTA() {
         style={{
           background: `linear-gradient(
             to bottom,
-            oklch(0.10 0.04 155 / 0.50) 0%,
-            oklch(0.10 0.04 155 / 0.60) 30%,
-            oklch(0.10 0.04 155 / 0.55) 60%,
-            oklch(0.10 0.04 155 / 0.30) 100%
+            oklch(0.10 0.04 155 / 0.65) 0%,
+            oklch(0.10 0.04 155 / 0.70) 35%,
+            oklch(0.10 0.04 155 / 0.60) 65%,
+            oklch(0.10 0.04 155 / 0.25) 100%
           )`,
         }}
       />
@@ -53,7 +53,7 @@ export default function MissionCTA() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-white/80 text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto"
+            className="text-white/80 text-base md:text-lg leading-relaxed mb-10 max-w-2xl mx-auto"
           >
             We understand the procurement cycles, compliance requirements, and community expectations that come with institutional work. Our process is designed to be transparent, accountable, and built for stakeholder review at every stage.
           </motion.p>
