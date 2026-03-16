@@ -634,13 +634,17 @@
        SECTION 4 — BUDGET
     ───────────────────────────────────────────── */
     .budget-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      justify-content: center;
       gap: 2rem;
-      margin-bottom: 3rem;
+      margin-top: 2.5rem;
+    }
+    .budget-card {
+      max-width: 480px;
+      width: 100%;
     }
     @media (max-width: 768px) {
-      .budget-grid { grid-template-columns: 1fr; }
+      .budget-grid { flex-direction: column; align-items: center; }
     }
     .budget-card {
       border-radius: 20px;
@@ -1059,7 +1063,7 @@
           </div>
           <div class="hero-meta-item">
             <span class="hero-meta-label">Budget Range</span>
-            <span class="hero-meta-value">$16,500 – $20,000</span>
+            <span class="hero-meta-value">$20,000</span>
           </div>
         </div>
         <div class="hero-actions">
@@ -1171,7 +1175,7 @@
                 <a href="https://civicfirm.com" class="portfolio-link-item" target="_blank" rel="noopener noreferrer">
                   UnitySnap <span>— Educational Media Production</span>
                 </a>
-                <p style="font-size:0.8rem;color:var(--ink-soft);margin-top:0.75rem;font-style:italic;">Writing samples available upon request if the copywriting option is selected.</p>
+                <p style="font-size:0.8rem;color:var(--ink-soft);margin-top:0.75rem;font-style:italic;">Two writing samples are attached to this PDF submission — both are from previous nonprofit engagements and reflect the tone, voice, and accessibility standards we would bring to OutNebraska's content.</p>
               </div>
             </div>
           </div>
@@ -1226,7 +1230,7 @@
             </div>
             <h3>EveryAction Integration</h3>
             <p>
-              Phase 1: Embed EveryAction forms styled to feel fully native to the site — not obviously embedded. Phase 2: Explore automating data flow via Zapier or direct EveryAction REST API webhooks so form submissions push directly into the CRM without manual export. Newsletter signup connected to EveryAction list. Event registration via EveryAction where applicable.
+              Phase 1: Embed EveryAction forms styled to feel fully native to the site — not obviously embedded. Phase 2: Explore automating data flow via Zapier or direct EveryAction REST API webhooks so form submissions push directly into the CRM without manual export. Newsletter signup connected to EveryAction list. Event registration via EveryAction where applicable. A tasteful, non-intrusive email capture pop-up will be implemented for newsletter signup using MailOptin or a lightweight custom solution — triggered by scroll depth or exit intent, dismissible with one click, and fully keyboard-accessible.
             </p>
             <span class="tech-tag">Native-Feel Embeds + API Automation</span>
           </div>
@@ -1279,6 +1283,42 @@
             <span class="tech-tag">ACF-Driven + Staff-Managed</span>
           </div>
 
+          <!-- Donation Page -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </div>
+            <h3>Donation Page</h3>
+            <p>
+              The Donation Page is a high-complexity, high-stakes page — it's a direct revenue driver and a moment of trust. The EveryAction donation form will be embedded and styled natively to the site, not as an obvious third-party widget. We'll work with OutNebraska's EveryAction configuration to ensure the form matches the site's visual identity and is fully accessible. Suggested giving amounts, recurring donation options, and mobile optimization are all included.
+            </p>
+            <span class="tech-tag">EveryAction — Native Embed</span>
+          </div>
+
+          <!-- Legislative Session Pages -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <h3>Legislative Session Pages</h3>
+            <p>
+              Campaign-specific pages built to be activated, updated, and archived across legislative sessions without developer involvement. Staff can update bill status, add action alerts, and publish session summaries directly from the WordPress back end. These pages are designed to be fast to update during active sessions and easy to archive when a session ends.
+            </p>
+            <span class="tech-tag">Staff-Managed — Session-Ready</span>
+          </div>
+
+          <!-- Contact Page -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <h3>Contact Page</h3>
+            <p>
+              A clean, accessible contact page with a custom form built in Gravity Forms — the most widely supported form plugin in the nonprofit WordPress ecosystem, with deep EveryAction compatibility and a familiar editing interface for staff. Form submissions routed to the appropriate staff inbox. Spam protection via honeypot and reCAPTCHA. Fully accessible and mobile-optimized.
+            </p>
+            <span class="tech-tag">Gravity Forms — Recommended</span>
+          </div>
+
           <!-- Content Migration -->
           <div class="tech-card">
             <div class="tech-card-icon" aria-hidden="true">
@@ -1286,7 +1326,7 @@
             </div>
             <h3>Content Migration</h3>
             <p>
-              Full export/import with URL mapping. 301 redirects managed via the Redirection plugin — no broken links, no lost SEO equity. All images run through optimization during migration. Existing SEO metadata preserved and improved using Yoast. Press statement and news post backlog migrated completely. We document every redirect for your records.
+              Full export/import with URL mapping. 301 redirects managed via the Redirection plugin — no broken links, no lost SEO equity. All images run through optimization during migration. Existing SEO metadata preserved and improved using Yoast. Blog posts and press statements are treated as separate content types with distinct templates and archives, migrated completely. We document every redirect for your records.
             </p>
             <span class="tech-tag">Zero Broken Links — Full SEO Preservation</span>
           </div>
@@ -1312,9 +1352,11 @@
               <tr><td><span class="plugin-name">Yoast SEO</span></td><td>SEO fundamentals, metadata, XML sitemaps</td><td>Client-covered</td></tr>
               <tr><td><span class="plugin-name">The Events Calendar Pro + Community Events</span></td><td>Event calendar with public submission workflow</td><td>Client-covered</td></tr>
               <tr><td><span class="plugin-name">Redirection</span></td><td>301 redirect management during migration</td><td>Free</td></tr>
-              <tr><td><span class="plugin-name">WP Mail SMTP</span></td><td>Reliable email delivery for forms and notifications</td><td>Free / Client-covered</td></tr>
+              <tr><td><span class="plugin-name">WP Mail SMTP</span></td><td>Reliable email delivery for forms and notifications</td><td>Free</td></tr>
               <tr><td><span class="plugin-name">MainWP / ManageWP</span></td><td>Ongoing maintenance and monitoring</td><td>Included in retainer</td></tr>
-              <tr><td><span class="plugin-name">Gravity Forms or WS Form</span></td><td>Intake forms and custom form workflows</td><td>Client-covered</td></tr>
+              <tr><td><span class="plugin-name">Gravity Forms</span></td><td>Contact, intake, and volunteer forms — deep EveryAction compatibility, familiar staff interface</td><td>Client-covered</td></tr>
+              <tr><td><span class="plugin-name">Google Site Kit</span></td><td>Google Analytics integration with goal tracking, directly in WP dashboard</td><td>Free</td></tr>
+              <tr><td><span class="plugin-name">Smash Balloon Suite</span></td><td>Social media feed integrations — Instagram, Facebook, LinkedIn, and Threads (all four platforms required by RFP)</td><td>Client-covered</td></tr>
             </tbody>
           </table>
         </div>
@@ -1365,7 +1407,7 @@
               <span class="timeline-dates">Weeks 6–13 · May 6 – June 30, 2026</span>
             </div>
             <p class="timeline-body">
-              WordPress build on SiteGround staging environment. Custom post types, ACF fields, EveryAction integrations, Bill Tracker, Resource Directory, Event Calendar, and all page templates. <strong>Weekly progress updates</strong> throughout development.
+              WordPress build on SiteGround staging environment. Custom post types, ACF fields, EveryAction integrations, Bill Tracker, Resource Directory, Event Calendar, Donation Page (native EveryAction embed), Legislative Session Pages, Contact Page (Gravity Forms), and all page templates. <strong>Weekly progress updates</strong> throughout development.
             </p>
           </div>
 
@@ -1406,7 +1448,7 @@
             <div class="timeline-dot" aria-hidden="true"></div>
             <div class="timeline-header">
               <span class="timeline-phase">Launch</span>
-              <span class="timeline-dates">Target: Late July / Early August 2026</span>
+              <span class="timeline-dates">Target: Mid–Late Q3 2026 (Q4 2026 if needed)</span>
             </div>
             <p class="timeline-body">
               DNS cutover coordinated with SiteGround and Cloudflare. 30-day stabilization period included. We stay close through go-live and the weeks that follow.
@@ -1435,94 +1477,126 @@
       <div class="container">
         <p class="section-eyebrow">04 — Investment</p>
         <h2 class="section-title" id="budget-heading">
-          Two clear options.<br />
-          <em>Both within your range.</em>
+          Two options.<br />
+          <em>One recommendation.</em>
         </h2>
         <p class="section-lead">
-          We're presenting two options that both fall within OutNebraska's stated budget range. The difference is whether copywriting is included. Everything else — the build, the integrations, the training, the support — is identical.
+          We're presenting two options as requested by the RFP. We recommend Option A — copywriting is not an add-on for an organization like OutNebraska. Authentic, mission-aligned copy is what makes a website work for the people who need it most. Both options include the same development scope, accessibility standards, and 90-day post-launch support.
         </p>
 
-        <div class="budget-grid">
+        <div class="budget-grid" style="justify-content:center;gap:2rem;">
 
-          <!-- Option A -->
-          <div class="budget-card">
-            <div class="budget-card-header">
+          <!-- Option A: With Copywriting (Recommended) -->
+          <div class="budget-card" style="max-width:480px;">
+            <div class="budget-card-header" style="position:relative;">
               <p class="budget-option-label">Option A — Recommended</p>
               <p class="budget-card-title">With Copywriting</p>
               <p class="budget-total">$20,000</p>
+              <span style="position:absolute;top:1rem;right:1.25rem;background:var(--green-accent);color:#111;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:0.25rem 0.6rem;border-radius:20px;">Our Recommendation</span>
             </div>
             <div class="budget-card-body">
-              <div class="budget-line">
+              <div class="budget-line" style="font-size:0.8rem;color:var(--ink-soft);border-bottom:1px solid var(--border);padding-bottom:0.5rem;margin-bottom:0.25rem;">
+                <span style="font-weight:700;color:var(--ink-mid);">Line Item</span>
+                <span style="font-weight:700;color:var(--ink-mid);">Est. Hours</span>
+                <span style="font-weight:700;color:var(--ink-mid);">Amount</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">Discovery &amp; Strategy</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~10 hrs</span>
                 <span class="budget-line-amount">$1,500</span>
               </div>
-              <div class="budget-line">
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">UX/Design (Figma)</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~20 hrs</span>
                 <span class="budget-line-amount">$2,500</span>
               </div>
-              <div class="budget-line">
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">WordPress Development</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~80 hrs</span>
                 <span class="budget-line-amount">$10,000</span>
               </div>
-              <div class="budget-line">
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">Copywriting</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~28 hrs</span>
                 <span class="budget-line-amount">$3,500</span>
               </div>
-              <div class="budget-line">
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">Content Migration</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~8 hrs</span>
                 <span class="budget-line-amount">$1,000</span>
               </div>
-              <div class="budget-line">
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">Training &amp; Documentation</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~6 hrs</span>
                 <span class="budget-line-amount">$750</span>
               </div>
-              <div class="budget-line">
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">Post-Launch Support (90 days)</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~6 hrs</span>
                 <span class="budget-line-amount">$750</span>
               </div>
-              <div class="budget-line total-line">
-                <span class="budget-line-label">Total Investment</span>
+              <div class="budget-line total-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Total</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~158 hrs</span>
                 <span class="budget-line-amount">$20,000</span>
               </div>
             </div>
           </div>
 
-          <!-- Option B -->
-          <div class="budget-card">
+          <!-- Option B: Without Copywriting -->
+          <div class="budget-card" style="max-width:480px;">
             <div class="budget-card-header option-b">
               <p class="budget-option-label">Option B</p>
               <p class="budget-card-title">Without Copywriting</p>
               <p class="budget-total">$16,500</p>
             </div>
             <div class="budget-card-body">
-              <div class="budget-line">
+              <div class="budget-line" style="font-size:0.8rem;color:var(--ink-soft);border-bottom:1px solid var(--border);padding-bottom:0.5rem;margin-bottom:0.25rem;">
+                <span style="font-weight:700;color:var(--ink-mid);">Line Item</span>
+                <span style="font-weight:700;color:var(--ink-mid);">Est. Hours</span>
+                <span style="font-weight:700;color:var(--ink-mid);">Amount</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">Discovery &amp; Strategy</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~10 hrs</span>
                 <span class="budget-line-amount">$1,500</span>
               </div>
-              <div class="budget-line">
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">UX/Design (Figma)</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~20 hrs</span>
                 <span class="budget-line-amount">$2,500</span>
               </div>
-              <div class="budget-line">
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">WordPress Development</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~80 hrs</span>
                 <span class="budget-line-amount">$10,000</span>
               </div>
-              <div class="budget-line">
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;opacity:0.45;text-decoration:line-through;">
+                <span class="budget-line-label">Copywriting</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">—</span>
+                <span class="budget-line-amount">$3,500</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">Content Migration</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~8 hrs</span>
                 <span class="budget-line-amount">$1,000</span>
               </div>
-              <div class="budget-line">
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">Training &amp; Documentation</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~6 hrs</span>
                 <span class="budget-line-amount">$750</span>
               </div>
-              <div class="budget-line">
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
                 <span class="budget-line-label">Post-Launch Support (90 days)</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~6 hrs</span>
                 <span class="budget-line-amount">$750</span>
               </div>
-              <div class="budget-line total-line">
-                <span class="budget-line-label">Total Investment</span>
+              <div class="budget-line total-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Total</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~130 hrs</span>
                 <span class="budget-line-amount">$16,500</span>
               </div>
+              <p style="font-size:0.8rem;color:var(--ink-soft);margin-top:1rem;font-style:italic;">OutNebraska provides all copy. Civic Firm will review for tone and accessibility but will not write or substantially edit content under this option.</p>
             </div>
           </div>
 
@@ -1611,6 +1685,22 @@
 
           <div class="logistics-card">
             <div class="logistics-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <h3>Scope Changes</h3>
+            <p>Any work outside the agreed scope requires a written change order before it begins — no surprises on either side. Out-of-scope work is billed at an agreed hourly rate of $95/hr. If anything emerges during development that could affect timeline or budget, we flag it immediately and collaboratively decide how to proceed before moving forward.</p>
+          </div>
+
+          <div class="logistics-card">
+            <div class="logistics-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <h3>Feedback &amp; Revision Cycles</h3>
+            <p>During development, you review the site on a live staging URL at each milestone checkpoint. Feedback is collected async via a shared document or Loom video — no need for a live call unless you prefer it. Two rounds of revisions are included per milestone. Additional revision rounds are available at the agreed hourly rate. Turnaround on revisions is typically 3–5 business days.</p>
+          </div>
+
+          <div class="logistics-card">
+            <div class="logistics-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <h3>Post-Launch Stability</h3>
@@ -1655,21 +1745,7 @@
           </a>
         </div>
 
-        <!-- Sample Homepage CTA -->
-        <div class="sample-cta-block" role="complementary" aria-label="Sample homepage preview">
-          <p style="font-size:1rem;color:rgba(255,255,255,0.8);font-weight:500;margin-bottom:0.5rem;">
-            Want to see what we'd actually build?
-          </p>
-          <p>
-            We've built a live sample homepage demonstrating exactly how OutNebraska's new site would look and feel — built in Kadence Pro, using your brand colors, typography, and content pillars. No mockup. A real build.
-          </p>
-          <a href="https://demos.civicfirm.com/" target="_blank" rel="noopener" class="btn btn-sample btn-lg" aria-label="View sample homepage for OutNebraska — opens demo site">
-            See What We'd Build &rarr; View Sample Homepage
-          </a>
-          <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-top:1rem;margin-bottom:0;">
-            Live WordPress demo — Kadence Pro build — OutNebraska brand colors and typography
-          </p>
-        </div>
+
 
       </div>
     </section>
