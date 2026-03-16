@@ -1,11 +1,13 @@
 /*
- * DESIGN: Institutional — Home Page
+ * DESIGN: Warm Institutional — Home Page
  * Assembles all sections in order.
+ * Purpose section sits between Marquee and Portfolio.
  * Green Results banner is the single stats section.
  */
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
+import Purpose from "@/components/Purpose";
 import Work from "@/components/Work";
 import Services from "@/components/Services";
 import Sectors from "@/components/Sectors";
@@ -36,6 +38,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Marquee items={clientNames} speed={35} />
+      <Purpose />
       <Work />
       <Sectors />
       <Services />

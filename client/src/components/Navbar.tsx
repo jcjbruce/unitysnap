@@ -70,7 +70,7 @@ export default function Navbar() {
   }, [location, setLocation]);
 
   const navBg = scrolled || isRFPPage || menuOpen
-    ? "bg-white dark:bg-[oklch(0.18_0.04_155)] shadow-sm border-b border-gray-100 dark:border-[oklch(0.30_0.03_155)]"
+    ? "bg-[oklch(0.985_0.008_85)] dark:bg-[oklch(0.18_0.04_155)] shadow-sm border-b border-[oklch(0.92_0.012_80)] dark:border-[oklch(0.30_0.03_155)]"
     : "bg-transparent";
 
   const linkBaseClass = (isScrolledOrRFP: boolean) =>
