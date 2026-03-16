@@ -108,7 +108,7 @@ export default function Services() {
             >
               {/* Number + icon */}
               <div className="flex md:flex-col items-center md:items-start gap-3 md:gap-2">
-                <span className="font-[var(--font-display)] font-bold text-3xl md:text-4xl text-[oklch(0.78_0.14_75)]/40 group-hover:text-[oklch(0.78_0.14_75)]/70 transition-colors leading-none">
+                <span className="font-[var(--font-display)] font-bold text-3xl md:text-4xl text-primary/25 group-hover:text-primary/50 transition-colors leading-none">
                   {service.num}
                 </span>
                 <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 flex-shrink-0">

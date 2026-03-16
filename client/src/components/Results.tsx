@@ -43,7 +43,7 @@ export default function Results() {
               <div className="font-[var(--font-display)] font-extrabold text-xl sm:text-3xl md:text-4xl lg:text-5xl text-primary-foreground tracking-tight leading-tight">
                 {metric.value}
               </div>
-              <div className="text-[oklch(0.85_0.10_75)] text-xs uppercase tracking-[0.2em] mt-2">
+              <div className="text-primary-foreground/60 text-xs uppercase tracking-[0.2em] mt-2">
                 {metric.label}
               </div>
             </motion.div>

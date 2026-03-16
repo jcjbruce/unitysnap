@@ -106,8 +106,8 @@ export default function FAQ() {
               transition={{ duration: 0.6 }}
               className="flex items-center gap-3 mb-4 md:mb-6"
             >
-              <div className="w-12 h-px bg-[oklch(0.78_0.14_75)]" />
-              <span className="text-[oklch(0.72_0.14_75)] text-xs uppercase tracking-[0.3em] font-semibold">
+              <div className="w-12 h-px bg-primary" />
+              <span className="text-primary text-xs uppercase tracking-[0.3em] font-semibold">
                 FAQs
               </span>
             </motion.div>
@@ -119,7 +119,7 @@ export default function FAQ() {
               className="font-[var(--font-display)] font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-foreground leading-[1.1] mb-6"
             >
               Questions from<br />
-              <span className="text-[oklch(0.72_0.14_75)]">procurement.</span>
+              <span className="text-primary">procurement.</span>
             </motion.h2>
 
             <motion.p

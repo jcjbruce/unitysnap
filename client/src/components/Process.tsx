@@ -93,8 +93,8 @@ export default function Process() {
             >
               {/* Step number */}
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-9 h-9 rounded-full bg-[oklch(0.78_0.14_75)]/10 flex items-center justify-center group-hover:bg-[oklch(0.78_0.14_75)] transition-all duration-300">
-                  <span className="text-[oklch(0.72_0.14_75)] group-hover:text-white font-[var(--font-display)] font-bold text-sm transition-colors">
+                <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-all duration-300">
+                  <span className="text-primary group-hover:text-white font-[var(--font-display)] font-bold text-sm transition-colors">
                     {step.num}
                   </span>
                 </div>
