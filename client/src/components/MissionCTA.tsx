@@ -1,27 +1,29 @@
 /*
- * DESIGN: Warm — Full-width Photo CTA Break
- * Photo background with warm dark overlay.
- * Bold serif headline with golden amber accent word.
- * Single CTA button. Inspired by Mentee's mid-page break.
+ * DESIGN: MissionCTA — Bold statement break
+ * No faded photo. Solid forest green background with subtle texture.
+ * Large, confident typography. Simple and impactful.
+ * Acts as a visual palate cleanser between content-heavy sections.
  */
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-
-const BG_IMAGE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/CU5JQUQHP3FutNoS5xA4np/hero-community-2_ceaeeeb0.jpg";
 
 export default function MissionCTA() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative py-24 md:py-36 overflow-hidden">
-      {/* Background photo */}
+    <section className="relative py-24 md:py-32 overflow-hidden bg-[oklch(0.18_0.04_155)]">
+      {/* Subtle grid pattern for texture — same as hero */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${BG_IMAGE})` }}
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
+        }}
       />
-      {/* Warm dark overlay — slightly golden tint */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.12_0.04_155/0.92)] via-[oklch(0.14_0.03_120/0.88)] to-[oklch(0.12_0.04_155/0.92)]" />
+
+      {/* Accent glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl pointer-events-none" />
 
       <div className="container relative z-10" ref={ref}>
         <div className="max-w-3xl mx-auto text-center">
@@ -33,7 +35,7 @@ export default function MissionCTA() {
             style={{ fontSize: "clamp(2rem, 4.5vw, 3.75rem)" }}
           >
             Technology should serve the{" "}
-            <span className="text-[oklch(0.78_0.14_75)] italic">community</span>,
+            <span className="text-primary italic">community</span>,
             <br />not the other way around.
           </motion.h2>
 
@@ -41,8 +43,7 @@ export default function MissionCTA() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-white/75 text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto"
-            style={{ fontFamily: "var(--font-body)" }}
+            className="text-white/60 text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto"
           >
             We understand the procurement cycles, compliance requirements, and community expectations that come with institutional work. Our process is designed to be transparent, accountable, and built for stakeholder review at every stage.
           </motion.p>
@@ -54,8 +55,7 @@ export default function MissionCTA() {
           >
             <a
               href="/rfp"
-              className="inline-flex items-center gap-2 bg-[oklch(0.78_0.14_75)] text-[oklch(0.15_0.04_75)] font-semibold text-sm px-7 py-3.5 rounded-md hover:bg-[oklch(0.82_0.12_75)] transition-all shadow-lg"
-              style={{ fontFamily: "var(--font-body)" }}
+              className="inline-flex items-center gap-2 bg-primary text-white font-semibold text-sm px-7 py-3.5 rounded-md hover:bg-[oklch(0.40_0.14_150)] transition-all"
             >
               Learn More
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
