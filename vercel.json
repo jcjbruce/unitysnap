@@ -3,6 +3,10 @@
   "buildCommand": "pnpm run build",
   "outputDirectory": "dist",
   "installCommand": "pnpm install",
+  "rewrites": [
+    { "source": "/vault", "destination": "/vault/index.html" },
+    { "source": "/vault/", "destination": "/vault/index.html" }
+  ],
   "redirects": [
     { "source": "/proposals/bcfc", "destination": "/proposals/BCFC/index.html", "permanent": true },
     { "source": "/proposals/bcfc/", "destination": "/proposals/BCFC/index.html", "permanent": true },
