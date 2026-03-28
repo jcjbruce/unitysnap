@@ -55,7 +55,7 @@ export default function Hero() {
           >
             <div className="w-10 h-0.5 bg-[oklch(0.78_0.14_75)]" />
             <span className="text-[oklch(0.78_0.14_75)] text-xs font-semibold uppercase tracking-[0.25em]">
-              Accessible Web Design for Public Organizations
+              Accessible Web Design for Organizations That Matter
             </span>
           </motion.div>
 
@@ -68,7 +68,7 @@ export default function Hero() {
             style={{ fontSize: "clamp(2.8rem, 6vw, 5.5rem)" }}
           >
             Built for organizations{" "}
-            <span className="text-primary">that serve</span> the public.
+            <span className="text-primary">that shape</span> their communities.
           </motion.h1>
 
           {/* Subheadline */}
@@ -78,7 +78,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-white/85 text-lg sm:text-xl md:text-2xl leading-relaxed mb-10 max-w-xl font-light"
           >
-            Accessible, compliant, and beautifully designed websites for governments, school districts, nonprofits, and public institutions.
+            Accessible, compliant, and beautifully designed websites for governments, nonprofits, small businesses, and community organizations across North America.
           </motion.p>
 
           {/* CTAs */}

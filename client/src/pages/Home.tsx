@@ -27,10 +27,11 @@ const clientNames = [
   "K–12 Education",
   "Nonprofit",
   "Indigenous Organizations",
-  "Housing Authorities",
+  "Small Business",
   "Arts & Culture",
   "Associations",
   "Public Health",
+  "Local Enterprise",
 ];
 
 export default function Home() {

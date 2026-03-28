@@ -81,6 +81,7 @@ const sectors = [
   "Healthcare / Public Health",
   "Arts, Culture & Heritage",
   "Professional Association",
+  "Small Business & Local Enterprise",
 ];
 
 export default function RFP() {
@@ -171,7 +172,7 @@ export default function RFP() {
               {[
                 { number: "100%", label: "WCAG Compliant" },
                 { number: "6", label: "Step Process" },
-                { number: "11", label: "Sectors Served" },
+                { number: "12", label: "Sectors Served" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
                   <div className="text-primary font-bold text-2xl md:text-3xl tracking-tight">{stat.number}</div>
@@ -376,7 +377,7 @@ export default function RFP() {
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="font-[var(--font-display)] font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight text-foreground"
             >
-              Trusted across <span className="text-primary">11 sectors</span> in North America.
+              Trusted across <span className="text-primary">12 sectors</span> in North America.
             </motion.h2>
 
             <motion.p
@@ -385,7 +386,7 @@ export default function RFP() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="text-muted-foreground text-sm md:text-base leading-relaxed mt-4"
             >
-              We tailor our approach to each sector's unique compliance requirements, procurement processes, and community context.
+              From procurement cycles to community expectations — we tailor our approach to the unique needs of each organization we serve.
             </motion.p>
           </div>
 

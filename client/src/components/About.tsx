@@ -68,10 +68,10 @@ export default function About() {
               className="space-y-4"
             >
               <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-                Civic Firm was built on a straightforward belief — that every organization deserves a website that truly reflects the quality of what they do. We specialize in serving institutions that serve the public: governments, schools, nonprofits, and community organizations.
+                Civic Firm was built on a straightforward belief — that every organization deserves a website that truly reflects the quality of what they do. We work with governments, nonprofits, small businesses, and community organizations that take what they do seriously and want a digital presence to match.
               </p>
               <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-                We understand the procurement cycles, compliance requirements, and community expectations that come with institutional work. Our process is designed to be transparent, accountable, and built for stakeholder review at every stage.
+                Whether it's navigating procurement cycles, meeting compliance requirements, or simply building something that respects the community an organization serves — our process is designed to be transparent, accountable, and built for stakeholder review at every stage.
               </p>
               <p className="text-foreground font-medium leading-relaxed text-sm md:text-base">
                 What stays constant across all of it: thoughtful, compliant work delivered with integrity, on time, and without the runaround.
@@ -86,9 +86,9 @@ export default function About() {
               className="mt-8 grid grid-cols-3 gap-4 pt-8 border-t border-border"
             >
               {[
-                { value: "50+", label: "Institutional clients" },
+                { value: "50+", label: "Projects delivered" },
                 { value: "100%", label: "On-time delivery" },
-                { value: "8", label: "Sectors served" },
+                { value: "12", label: "Sectors served" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <div className="font-[var(--font-display)] font-bold text-2xl text-primary">{stat.value}</div>
