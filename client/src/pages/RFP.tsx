@@ -70,6 +70,7 @@ const credentials = [
 ];
 
 const sectors = [
+  "Small Business & Local Enterprise",
   "Municipal / City Government",
   "County Government",
   "State / Provincial Agency",
@@ -81,7 +82,6 @@ const sectors = [
   "Healthcare / Public Health",
   "Arts, Culture & Heritage",
   "Professional Association",
-  "Small Business & Local Enterprise",
 ];
 
 export default function RFP() {
