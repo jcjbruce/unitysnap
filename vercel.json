@@ -5,7 +5,8 @@
   "installCommand": "pnpm install",
   "rewrites": [
     { "source": "/vault", "destination": "/vault/index.html" },
-    { "source": "/vault/", "destination": "/vault/index.html" }
+    { "source": "/vault/", "destination": "/vault/index.html" },
+    { "source": "/proposals/bb/sample", "destination": "/proposals/bb/index.html" }
   ],
   "redirects": [
     { "source": "/proposals/bcfc", "destination": "/proposals/BCFC/index.html", "permanent": true },
@@ -26,6 +27,14 @@
     { "source": "/proposals/OutNebraska", "destination": "/proposals/OUTNEBRASKA/index.html", "permanent": true },
     { "source": "/proposals/OutNebraska/", "destination": "/proposals/OUTNEBRASKA/index.html", "permanent": true },
     { "source": "/proposals/Outnebraska", "destination": "/proposals/OUTNEBRASKA/index.html", "permanent": true },
-    { "source": "/proposals/Outnebraska/", "destination": "/proposals/OUTNEBRASKA/index.html", "permanent": true }
+    { "source": "/proposals/Outnebraska/", "destination": "/proposals/OUTNEBRASKA/index.html", "permanent": true },
+    { "source": "/proposals/BB", "destination": "/proposals/bb/index.html", "permanent": true },
+    { "source": "/proposals/BB/", "destination": "/proposals/bb/index.html", "permanent": true },
+    { "source": "/proposals/BB/index.html", "destination": "/proposals/bb/index.html", "permanent": true },
+    { "source": "/proposals/BB/:path*", "destination": "/proposals/bb/:path*", "permanent": true },
+    { "source": "/proposals/Bb", "destination": "/proposals/bb/index.html", "permanent": true },
+    { "source": "/proposals/Bb/", "destination": "/proposals/bb/index.html", "permanent": true },
+    { "source": "/proposals/bB", "destination": "/proposals/bb/index.html", "permanent": true },
+    { "source": "/proposals/bB/", "destination": "/proposals/bb/index.html", "permanent": true }
   ]
 }
