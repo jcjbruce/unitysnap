@@ -140,7 +140,7 @@ export default function Navbar() {
                 href="/contact"
                 className="text-sm font-semibold px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/90 transition-all shadow-sm"
               >
-                Work With Us
+                Connect With Us
               </a>
             </div>
 
@@ -184,7 +184,7 @@ export default function Navbar() {
               href="/contact"
               className="w-full text-center py-3 rounded-md bg-primary text-white font-semibold text-base"
             >
-              Work With Us
+              Connect With Us
             </a>
           </div>
           <div className="mt-auto pt-6 flex items-center gap-3">
