@@ -203,7 +203,7 @@ export default function Sectors() {
             </p>
           </div>
           <a
-            href="/#contact"
+            href="/contact"
             className="flex-shrink-0 inline-flex items-center gap-2 bg-primary text-white font-semibold text-sm px-5 py-2.5 rounded-md hover:bg-[oklch(0.40_0.14_150)] transition-all whitespace-nowrap"
           >
             Get In Touch

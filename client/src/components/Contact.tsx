@@ -76,20 +76,13 @@ export default function Contact() {
             className="flex flex-col sm:flex-row gap-4 items-start flex-wrap"
           >
             <a
-              href="mailto:info@civicfirm.com"
+              href="/contact"
               className="inline-flex items-center gap-2 bg-primary text-white font-semibold text-sm px-7 py-4 rounded-md hover:bg-[oklch(0.40_0.14_150)] transition-all shadow-lg shadow-primary/30"
             >
               Get In Touch
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </a>
-
-            <a
-              href="mailto:info@civicfirm.com"
-              className="inline-flex items-center gap-2 border-2 border-white/40 text-white font-semibold text-sm px-7 py-4 rounded-md hover:bg-white/10 hover:border-white/60 transition-all"
-            >
-              Email Us Directly
             </a>
           </motion.div>
 
@@ -101,14 +94,8 @@ export default function Contact() {
             className="mt-10 flex flex-wrap gap-8"
           >
             <div>
-              <div className="text-white/40 text-[10px] uppercase tracking-[0.15em] mb-1">Email</div>
-              <a href="mailto:info@civicfirm.com" className="text-white/80 text-sm hover:text-white transition-colors">
-                info@civicfirm.com
-              </a>
-            </div>
-            <div>
               <div className="text-white/40 text-[10px] uppercase tracking-[0.15em] mb-1">Response Time</div>
-              <span className="text-white/80 text-sm">Within 2 business days</span>
+              <span className="text-white/80 text-sm">Within 24–48 hours</span>
             </div>
             <div>
               <div className="text-white/40 text-[10px] uppercase tracking-[0.15em] mb-1">Location</div>

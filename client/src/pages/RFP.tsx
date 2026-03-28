@@ -344,7 +344,7 @@ export default function RFP() {
             className="text-center mt-12"
           >
             <a
-              href="mailto:info@civicfirm.com"
+              href="/contact"
               className="inline-flex items-center gap-2 bg-[oklch(0.45_0.14_150)] text-white font-semibold text-sm px-7 py-3.5 rounded-md hover:bg-[oklch(0.40_0.14_150)] transition-all"
             >
               Work With Us
@@ -470,7 +470,7 @@ export default function RFP() {
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <a
-                href="mailto:info@civicfirm.com"
+                href="/contact"
                 className="inline-flex items-center justify-center gap-2 bg-primary text-white font-semibold text-sm px-8 py-4 rounded-md hover:bg-[oklch(0.40_0.14_150)] transition-all shadow-lg shadow-primary/30"
               >
                 Email Us Directly
@@ -493,14 +493,8 @@ export default function RFP() {
               className="mt-12 flex flex-wrap justify-center gap-10"
             >
               <div className="text-center">
-                <div className="text-white/35 text-[10px] uppercase tracking-[0.15em] mb-1">Email</div>
-                <a href="mailto:info@civicfirm.com" className="text-white/80 text-sm hover:text-white transition-colors">
-                  info@civicfirm.com
-                </a>
-              </div>
-              <div className="text-center">
                 <div className="text-white/35 text-[10px] uppercase tracking-[0.15em] mb-1">Response Time</div>
-                <span className="text-white/80 text-sm">Within 2 business days</span>
+                <span className="text-white/80 text-sm">Within 24–48 hours</span>
               </div>
               <div className="text-center">
                 <div className="text-white/35 text-[10px] uppercase tracking-[0.15em] mb-1">Location</div>

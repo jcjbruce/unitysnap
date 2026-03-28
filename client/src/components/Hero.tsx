@@ -89,7 +89,7 @@ export default function Hero() {
             className="flex flex-wrap gap-4 mb-12"
           >
             <a
-              href="/#contact"
+              href="/contact"
               className="inline-flex items-center gap-2 bg-primary text-white font-semibold text-base px-8 py-4 rounded-md hover:bg-[oklch(0.40_0.14_150)] transition-all shadow-lg shadow-primary/25"
             >
               Work With Us

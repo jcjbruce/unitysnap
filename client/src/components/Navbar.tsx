@@ -137,8 +137,7 @@ export default function Navbar() {
 
               {/* Primary green CTA */}
               <a
-                href="/#contact"
-                onClick={(e) => handleNavClick(e, "/#contact")}
+                href="/contact"
                 className="text-sm font-semibold px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/90 transition-all shadow-sm"
               >
                 Work With Us
@@ -182,8 +181,7 @@ export default function Navbar() {
           ))}
           <div className="mt-6 flex flex-col gap-3">
             <a
-              href="/#contact"
-              onClick={(e) => handleNavClick(e, "/#contact")}
+              href="/contact"
               className="w-full text-center py-3 rounded-md bg-primary text-white font-semibold text-base"
             >
               Work With Us

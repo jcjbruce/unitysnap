@@ -268,7 +268,7 @@ export default function Animations() {
               </p>
             </div>
             <div className="flex gap-3 flex-shrink-0">
-              <Link href="/#contact">
+              <Link href="/contact">
                 <a className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-[var(--font-display)] font-bold text-sm uppercase tracking-[0.08em] rounded-md hover:bg-primary/90 transition-colors">
                   Start a Project →
                 </a>

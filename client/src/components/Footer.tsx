@@ -95,16 +95,16 @@ export default function Footer() {
             </h5>
             <div className="flex flex-col gap-3">
               <a
-                href="mailto:info@civicfirm.com"
+                href="/contact"
                 className="text-white/50 text-sm hover:text-white transition-colors"
               >
-                info@civicfirm.com
+                Contact Us
               </a>
               <span className="text-white/50 text-sm">
                 Remote-First, North America
               </span>
               <a
-                href="/#contact"
+                href="/contact"
                 className="inline-flex items-center gap-2 bg-primary text-white font-semibold text-xs px-4 py-2.5 rounded-md hover:bg-[oklch(0.40_0.14_150)] transition-all mt-2 w-fit"
               >
                 Work With Us

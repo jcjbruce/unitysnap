@@ -67,7 +67,7 @@ export default function Compliance() {
               className="mt-8"
             >
               <a
-                href="/#contact"
+                href="/contact"
                 className="inline-flex items-center gap-2 bg-[oklch(0.45_0.14_150)] text-white font-semibold text-sm px-6 py-3 rounded-md hover:bg-[oklch(0.40_0.14_150)] transition-all"
               >
                 Work With Us

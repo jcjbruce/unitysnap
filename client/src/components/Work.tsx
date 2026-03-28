@@ -270,7 +270,7 @@ export default function Work() {
             All projects built to WCAG 2.1 AA accessibility standards.
           </p>
           <a
-            href="mailto:info@civicfirm.com"
+            href="/contact"
             className="inline-flex items-center gap-2 text-primary text-sm font-semibold hover:underline underline-offset-4"
           >
             Start a project

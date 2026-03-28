@@ -6,11 +6,13 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import RFP from "./pages/RFP";
+import ContactPage from "./pages/ContactPage";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/contact"} component={ContactPage} />
       <Route path={"/rfp"} component={RFP} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
