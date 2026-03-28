@@ -67,7 +67,7 @@ export default function Hero() {
             className="font-[var(--font-display)] font-extrabold text-white leading-[1.05] tracking-tight mb-8"
             style={{ fontSize: "clamp(2.8rem, 6vw, 5.5rem)" }}
           >
-            Websites for organizations{" "}
+            Built for organizations{" "}
             <span className="text-primary">that mean something</span> to their communities.
           </motion.h1>
 
