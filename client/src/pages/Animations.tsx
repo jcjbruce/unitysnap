@@ -258,7 +258,7 @@ export default function Animations() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-px bg-primary" />
-                <span className="text-primary text-xs uppercase tracking-[0.3em] font-semibold">Work With Us</span>
+                <span className="text-primary text-xs uppercase tracking-[0.3em] font-semibold">Connect With Us</span>
               </div>
               <h2 className="font-[var(--font-display)] font-extrabold text-2xl md:text-4xl text-white tracking-tight leading-tight">
                 Ready to animate your story?
