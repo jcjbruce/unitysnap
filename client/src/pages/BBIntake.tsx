@@ -1212,7 +1212,7 @@ export default function Intake() {
 
             <p className="font-medium text-[#2a3a2a] text-xs tracking-editorial uppercase mt-6 mb-2">1. Scope of Work</p>
             <p>
-              Provider will design and develop a custom website for Client based on the preferences and materials submitted through this intake form. The project includes initial design, content integration, up to two rounds of revisions based on client feedback, and deployment to a live domain.
+              Provider will design and develop a custom website for Client based on the preferences and materials submitted through this intake form. The project includes initial design, content integration, revisions based on client feedback, and deployment to a live domain.
             </p>
 
             <p className="font-medium text-[#2a3a2a] text-xs tracking-editorial uppercase mt-6 mb-2">2. Project Fee &amp; Payment Schedule</p>
