@@ -24,12 +24,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const supabase = createClient(supabaseUrl, supabaseKey);
 
   const submission = {
-    business_name: businessName ?? null,
-    contact_name: contactName ?? null,
-    contact_email: contactEmail ?? null,
-    contact_phone: contactPhone ?? null,
-    form_data: formData,
-    file_urls: Array.isArray(fileUrls) ? fileUrls.join(",") : null,
+    project_slug: businessName ?? "unknown",
+    contact_email: contactEmail ?? "unknown",
+    payload: {
+      business_name: businessName ?? null,
+      contact_name: contactName ?? null,
+      contact_phone: contactPhone ?? null,
+      form_data: formData,
+      file_urls: Array.isArray(fileUrls) ? fileUrls : [],
+    },
   };
 
   // Primary insert
@@ -48,7 +51,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Fallback to backup table
     const { data: backupData, error: backupError } = await supabase
       .from("intake_submissions_backup")
-      .insert(submission)
+      .insert({ ...submission, error_log: { error: error.message } })
       .select("id")
       .single();
 
@@ -68,7 +71,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const resend = new Resend(resendKey);
       await resend.emails.send({
         from: "Becker's Bridal Intake <onboarding@resend.dev>",
-        to: "info@civicfirm.ca",
+        to: "info@civicfirm.com",
         subject: `New Intake Submission: ${businessName || "Unknown"}`,
         text: [
           `Business: ${businessName || "N/A"}`,
