@@ -70,44 +70,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (resendKey) {
       const resend = new Resend(resendKey);
 
-      // ─── Collect all file URLs from formData and fileUrls ───────
-      const allUrls: string[] = [];
-      const fileKeys = ["typography_files", "color_reference_files", "photo_files", "designer_logo_files", "social_inspiration_files"];
-      for (const key of fileKeys) {
-        const val = formData[key];
-        if (val && typeof val === "string") {
-          val.split(", ").filter((u: string) => u.startsWith("http")).forEach((u: string) => {
-            if (!allUrls.includes(u)) allUrls.push(u);
-          });
-        }
-      }
-      if (Array.isArray(fileUrls)) {
-        fileUrls.forEach((u: string) => {
-          if (u.startsWith("http") && !allUrls.includes(u)) allUrls.push(u);
-        });
-      }
-
-      // ─── Download files and create attachments + cid map ────────
-      const attachments: { filename: string; content: Buffer; cid: string }[] = [];
-      const cidMap = new Map<string, string>(); // url -> cid
-
-      for (let i = 0; i < allUrls.length; i++) {
-        const url = allUrls[i];
-        try {
-          const response = await fetch(url);
-          if (response.ok) {
-            const buffer = Buffer.from(await response.arrayBuffer());
-            const rawName = decodeURIComponent(url.split("/").pop() || `file-${i}`);
-            const displayName = rawName.replace(/^[a-zA-Z0-9_-]{10,12}-/, "");
-            const cid = `file-${i}@intake`;
-            cidMap.set(url, cid);
-            attachments.push({ filename: displayName, content: buffer, cid });
-          }
-        } catch (e) {
-          console.warn(`[intake-submit] Failed to download ${url}:`, e);
-        }
-      }
-
       // ─── Build email HTML ───────────────────────────────────────
       const sections = [
         { title: "1 — Brand & Identity", fields: [
@@ -177,13 +139,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return val.split(", ").filter(Boolean).map((fileUrl: string) => {
           const rawName = decodeURIComponent(fileUrl.split("/").pop() || fileUrl);
           const fileName = rawName.replace(/^[a-zA-Z0-9_-]{10,12}-/, "");
-          // Find which attachment this corresponds to
-          const attachment = attachments.find((a) => a.filename === fileName);
-          const label = attachment ? `✅ ${fileName} (attached)` : `📎 ${fileName}`;
           if (fileUrl.startsWith("http")) {
-            return `<div style="margin-bottom: 8px;"><a href="${fileUrl}" style="color: #4a5a4a; text-decoration: underline;">${label}</a></div>`;
+            return `
+              <div style="margin-bottom: 10px; padding: 10px 14px; background: #faf8f5; border: 1px solid #e8e0d8; border-radius: 4px;">
+                <a href="${fileUrl}" style="color: #4a5a4a; text-decoration: none; font-size: 14px;">
+                  📎 <strong>${fileName}</strong>
+                </a>
+                <div style="margin-top: 4px;">
+                  <a href="${fileUrl}" style="font-size: 11px; color: #c9b99a; text-decoration: underline;">View / Download</a>
+                </div>
+              </div>`;
           }
-          return `<div style="margin-bottom: 8px;">${label}</div>`;
+          return `<div style="margin-bottom: 8px;">📎 ${fileName}</div>`;
         }).join("");
       };
 
@@ -207,7 +174,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         from: "Civic Firm Intake <intake@civicfirm.com>",
         to: "info@civicfirm.com",
         subject: `New Intake: ${businessName || "Unknown"}`,
-        attachments,
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #2a3a2a;">
             <div style="background: #f5f0eb; padding: 24px 32px; border-bottom: 2px solid #c9b99a;">
