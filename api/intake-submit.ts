@@ -140,7 +140,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           .map((f) => {
             const val = String(formData[f.key]);
             const display = f.isFile
-              ? val.split(", ").filter(Boolean).map((file: string) => `📎 ${file}`).join("<br/>")
+              ? val.split(", ").filter(Boolean).map((fileUrl: string) => {
+                  const fileName = decodeURIComponent(fileUrl.split("/").pop() || fileUrl).replace(/^[a-zA-Z0-9_-]{10}-/, "");
+                  if (fileUrl.startsWith("http")) {
+                    return `📎 <a href="${fileUrl}" style="color: #4a5a4a; text-decoration: underline;">${fileName}</a>`;
+                  }
+                  return `📎 ${fileName}`;
+                }).join("<br/>")
               : val.replace(/\n/g, "<br/>");
             return `<div style="${labelStyle}">${f.label}</div><div style="${valueStyle}">${display}</div>`;
           }).join("");
@@ -177,7 +183,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             ${Array.isArray(fileUrls) && fileUrls.length > 0 ? `
             <div style="padding: 24px 32px; background: #fff; border-top: 1px solid #e8e0d8;">
               <h2 style="${sectionStyle}">All Uploaded Files</h2>
-              ${fileUrls.map((f: string) => `<div style="font-size: 14px; margin-bottom: 6px;">📎 ${f}</div>`).join("")}
+              ${fileUrls.map((f: string) => {
+                const name = decodeURIComponent(f.split("/").pop() || f).replace(/^[a-zA-Z0-9_-]{10}-/, "");
+                if (f.startsWith("http")) {
+                  return `<div style="font-size: 14px; margin-bottom: 6px;">📎 <a href="${f}" style="color: #4a5a4a; text-decoration: underline;">${name}</a></div>`;
+                }
+                return `<div style="font-size: 14px; margin-bottom: 6px;">📎 ${name}</div>`;
+              }).join("")}
             </div>` : ""}
 
             <div style="padding: 16px 32px; background: #f5f0eb; font-size: 12px; color: #a8b8a8;">

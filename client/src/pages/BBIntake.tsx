@@ -77,13 +77,42 @@ function FileUpload({
 
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList[i];
-      // Track file by name — Uploadcare handles actual hosting on the client
-      newFiles.push({ name: file.name, url: file.name });
+      try {
+        // Convert file to base64
+        const base64 = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve((reader.result as string).split(",")[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+
+        // Upload to server API → Supabase Storage
+        const res = await fetch("/api/intake-upload", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fileName: file.name,
+            fileType: file.type,
+            fileData: base64,
+          }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          newFiles.push({ name: file.name, url: data.url });
+        } else {
+          console.error(`Upload failed for ${file.name}`);
+          newFiles.push({ name: `${file.name} (upload failed)`, url: "" });
+        }
+      } catch (err) {
+        console.error(`Upload error for ${file.name}:`, err);
+        newFiles.push({ name: `${file.name} (upload failed)`, url: "" });
+      }
     }
 
     const updated = [...files, ...newFiles];
     setFiles(updated);
-    onChange(updated.map((f) => f.url));
+    onChange(updated.map((f) => f.url).filter(Boolean));
     setUploading(false);
   }, [files, onChange]);
 
