@@ -69,7 +69,46 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const resendKey = process.env.RESEND_API_KEY;
     if (resendKey) {
       const resend = new Resend(resendKey);
-      // Mirror the exact form sections and field labels
+
+      // ─── Collect all file URLs from formData and fileUrls ───────
+      const allUrls: string[] = [];
+      const fileKeys = ["typography_files", "color_reference_files", "photo_files", "designer_logo_files", "social_inspiration_files"];
+      for (const key of fileKeys) {
+        const val = formData[key];
+        if (val && typeof val === "string") {
+          val.split(", ").filter((u: string) => u.startsWith("http")).forEach((u: string) => {
+            if (!allUrls.includes(u)) allUrls.push(u);
+          });
+        }
+      }
+      if (Array.isArray(fileUrls)) {
+        fileUrls.forEach((u: string) => {
+          if (u.startsWith("http") && !allUrls.includes(u)) allUrls.push(u);
+        });
+      }
+
+      // ─── Download files and create attachments + cid map ────────
+      const attachments: { filename: string; content: Buffer; cid: string }[] = [];
+      const cidMap = new Map<string, string>(); // url -> cid
+
+      for (let i = 0; i < allUrls.length; i++) {
+        const url = allUrls[i];
+        try {
+          const response = await fetch(url);
+          if (response.ok) {
+            const buffer = Buffer.from(await response.arrayBuffer());
+            const rawName = decodeURIComponent(url.split("/").pop() || `file-${i}`);
+            const displayName = rawName.replace(/^[a-zA-Z0-9_-]{10,12}-/, "");
+            const cid = `file-${i}@intake`;
+            cidMap.set(url, cid);
+            attachments.push({ filename: displayName, content: buffer, cid });
+          }
+        } catch (e) {
+          console.warn(`[intake-submit] Failed to download ${url}:`, e);
+        }
+      }
+
+      // ─── Build email HTML ───────────────────────────────────────
       const sections = [
         { title: "1 — Brand & Identity", fields: [
           { key: "business_name", label: "Business name" },
@@ -134,30 +173,33 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const labelStyle = `font-size: 12px; color: #6b7b6b; margin-bottom: 4px;`;
       const valueStyle = `font-size: 14px; line-height: 1.7; color: #2a3a2a; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid #f0ebe5;`;
 
+      const renderFileField = (val: string) => {
+        return val.split(", ").filter(Boolean).map((fileUrl: string) => {
+          const rawName = decodeURIComponent(fileUrl.split("/").pop() || fileUrl);
+          const fileName = rawName.replace(/^[a-zA-Z0-9_-]{10,12}-/, "");
+          const isImage = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(fileName);
+          const cid = cidMap.get(fileUrl);
+
+          if (cid && isImage) {
+            return `
+              <div style="margin-bottom: 12px;">
+                <img src="cid:${cid}" alt="${fileName}" style="max-width: 100%; max-height: 400px; border: 1px solid #e8e0d8; border-radius: 4px; display: block;" />
+                <div style="font-size: 11px; color: #a8b8a8; margin-top: 4px;">${fileName}</div>
+              </div>`;
+          }
+          if (fileUrl.startsWith("http")) {
+            return `<div style="margin-bottom: 8px;">📎 <a href="${fileUrl}" style="color: #4a5a4a; text-decoration: underline;">${fileName}</a></div>`;
+          }
+          return `<div style="margin-bottom: 8px;">📎 ${fileName}</div>`;
+        }).join("");
+      };
+
       const sectionsHtml = sections.map((section) => {
         const fieldsHtml = section.fields
           .filter((f) => formData[f.key] && String(formData[f.key]).trim())
           .map((f) => {
             const val = String(formData[f.key]);
-            const display = f.isFile
-              ? val.split(", ").filter(Boolean).map((fileUrl: string) => {
-                  const fileName = decodeURIComponent(fileUrl.split("/").pop() || fileUrl).replace(/^[a-zA-Z0-9_-]{10}-/, "");
-                  if (fileUrl.startsWith("http")) {
-                    const isImage = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(fileName);
-                    if (isImage) {
-                      return `
-                        <div style="margin-bottom: 12px;">
-                          <a href="${fileUrl}" style="display: block;">
-                            <img src="${fileUrl}" alt="${fileName}" style="max-width: 100%; max-height: 300px; border: 1px solid #e8e0d8; border-radius: 4px;" />
-                          </a>
-                          <div style="font-size: 11px; color: #a8b8a8; margin-top: 4px;">${fileName}</div>
-                        </div>`;
-                    }
-                    return `<div style="margin-bottom: 8px;">📎 <a href="${fileUrl}" style="color: #4a5a4a; text-decoration: underline;">${fileName}</a></div>`;
-                  }
-                  return `<div style="margin-bottom: 8px;">📎 ${fileName}</div>`;
-                }).join("")
-              : val.replace(/\n/g, "<br/>");
+            const display = f.isFile ? renderFileField(val) : val.replace(/\n/g, "<br/>");
             return `<div style="${labelStyle}">${f.label}</div><div style="${valueStyle}">${display}</div>`;
           }).join("");
         if (!fieldsHtml) return "";
@@ -172,6 +214,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         from: "Civic Firm Intake <intake@civicfirm.com>",
         to: "info@civicfirm.com",
         subject: `New Intake: ${businessName || "Unknown"}`,
+        attachments,
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #2a3a2a;">
             <div style="background: #f5f0eb; padding: 24px 32px; border-bottom: 2px solid #c9b99a;">
@@ -189,28 +232,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             </div>
 
             ${sectionsHtml}
-
-            ${Array.isArray(fileUrls) && fileUrls.length > 0 ? `
-            <div style="padding: 24px 32px; background: #fff; border-top: 1px solid #e8e0d8;">
-              <h2 style="${sectionStyle}">All Uploaded Files</h2>
-              ${fileUrls.map((f: string) => {
-                const name = decodeURIComponent(f.split("/").pop() || f).replace(/^[a-zA-Z0-9_-]{10}-/, "");
-                const isImage = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(name);
-                if (f.startsWith("http") && isImage) {
-                  return `
-                    <div style="margin-bottom: 16px;">
-                      <a href="${f}" style="display: block;">
-                        <img src="${f}" alt="${name}" style="max-width: 100%; max-height: 250px; border: 1px solid #e8e0d8; border-radius: 4px;" />
-                      </a>
-                      <div style="font-size: 11px; color: #a8b8a8; margin-top: 4px;">${name}</div>
-                    </div>`;
-                }
-                if (f.startsWith("http")) {
-                  return `<div style="font-size: 14px; margin-bottom: 6px;">📎 <a href="${f}" style="color: #4a5a4a; text-decoration: underline;">${name}</a></div>`;
-                }
-                return `<div style="font-size: 14px; margin-bottom: 6px;">📎 ${name}</div>`;
-              }).join("")}
-            </div>` : ""}
 
             <div style="padding: 16px 32px; background: #f5f0eb; font-size: 12px; color: #a8b8a8;">
               Submission ID: ${id}
