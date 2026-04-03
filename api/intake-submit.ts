@@ -106,7 +106,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         });
 
       await resend.emails.send({
-        from: "Civic Firm Intake <intake@civicfirm.com>",
+        from: "Civic Firm Intake <onboarding@resend.dev>",
         to: "info@civicfirm.com",
         subject: `New Intake: ${businessName || "Unknown"}`,
         html: `
