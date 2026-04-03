@@ -1156,42 +1156,6 @@ export default function Intake() {
           </Field>
         </Section>
 
-        {/* ── Payment Confirmation Block (moved to bottom) ─────────── */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="mt-16 bg-white border border-[#a8b8a8]/15 p-8 md:p-10"
-        >
-          <p className="font-body text-xs tracking-editorial uppercase text-[#c9b99a] mb-6">
-            Payment Summary
-          </p>
-          <p className="font-body text-sm text-[#4a5a4a] leading-relaxed mb-6">
-            You're confirmed on the <strong className="font-medium text-[#2a3a2a]">Launch Package</strong> at <strong className="font-medium text-[#2a3a2a]">$4,500</strong>, with payments structured as follows:
-          </p>
-          <div className="space-y-3 mb-6">
-            {[
-              { pct: "40%", amount: "$1,800", label: "Due now to kick off" },
-              { pct: "30%", amount: "$1,350", label: "Due on first draft delivery" },
-              { pct: "30%", amount: "$1,350", label: "Due on final handover" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-baseline gap-4">
-                <span className="font-body text-sm font-medium text-[#2a3a2a] w-10 shrink-0">{item.pct}</span>
-                <span className="font-body text-sm text-[#c9b99a] w-16 shrink-0">{item.amount}</span>
-                <span className="font-body text-sm text-[#6b7b6b]">{item.label}</span>
-              </div>
-            ))}
-          </div>
-          <div className="pt-6 border-t border-[#a8b8a8]/10">
-            <p className="font-body text-sm text-[#6b7b6b]">
-              Please e-transfer your deposit to{" "}
-              <strong className="font-medium text-[#2a3a2a]">rezaamari@gmail.com</strong>{" "}
-              to get started.
-            </p>
-          </div>
-        </motion.div>
-
         {/* ── Service Agreement ──────────────────────────────────────── */}
         <motion.div
           id="agreement-section"
@@ -1207,7 +1171,7 @@ export default function Intake() {
 
           <div className="font-body text-sm text-[#4a5a4a] leading-relaxed space-y-4 mb-8">
             <p>
-              This Service Agreement ("Agreement") is entered into between <strong className="text-[#2a3a2a]">Civic Firm</strong> ("Provider"), operated by Jason Bruce, and the undersigned client ("Client") for the design and development of a custom website.
+              This Service Agreement ("Agreement") is entered into between <strong className="text-[#2a3a2a]">Civic Firm</strong> ("Provider"), operated by Jason Bruce, and <strong className="text-[#2a3a2a]">Becker's Bridals</strong>, represented by the undersigned ("Client"), for the design and development of a custom website.
             </p>
 
             <p className="font-medium text-[#2a3a2a] text-xs tracking-editorial uppercase mt-6 mb-2">1. Scope of Work</p>
