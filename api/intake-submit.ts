@@ -177,20 +177,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return val.split(", ").filter(Boolean).map((fileUrl: string) => {
           const rawName = decodeURIComponent(fileUrl.split("/").pop() || fileUrl);
           const fileName = rawName.replace(/^[a-zA-Z0-9_-]{10,12}-/, "");
-          const isImage = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(fileName);
-          const cid = cidMap.get(fileUrl);
-
-          if (cid && isImage) {
-            return `
-              <div style="margin-bottom: 12px;">
-                <img src="cid:${cid}" alt="${fileName}" style="max-width: 100%; max-height: 400px; border: 1px solid #e8e0d8; border-radius: 4px; display: block;" />
-                <div style="font-size: 11px; color: #a8b8a8; margin-top: 4px;">${fileName}</div>
-              </div>`;
-          }
+          // Find which attachment this corresponds to
+          const attachment = attachments.find((a) => a.filename === fileName);
+          const label = attachment ? `✅ ${fileName} (attached)` : `📎 ${fileName}`;
           if (fileUrl.startsWith("http")) {
-            return `<div style="margin-bottom: 8px;">📎 <a href="${fileUrl}" style="color: #4a5a4a; text-decoration: underline;">${fileName}</a></div>`;
+            return `<div style="margin-bottom: 8px;"><a href="${fileUrl}" style="color: #4a5a4a; text-decoration: underline;">${label}</a></div>`;
           }
-          return `<div style="margin-bottom: 8px;">📎 ${fileName}</div>`;
+          return `<div style="margin-bottom: 8px;">${label}</div>`;
         }).join("");
       };
 
