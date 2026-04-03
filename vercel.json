@@ -10,7 +10,8 @@
     { "source": "/proposals/bb/sample", "destination": "/proposals/bb/index.html" },
     { "source": "/gtalenders", "destination": "/gtalenders/index.html" },
     { "source": "/gtalenders/", "destination": "/gtalenders/index.html" },
-    { "source": "/gtalenders/:path*", "destination": "/gtalenders/index.html" }
+    { "source": "/gtalenders/:path*", "destination": "/gtalenders/index.html" },
+    { "source": "/proposals/bb/intake/", "destination": "/index.html" }
   ],
   "redirects": [
     { "source": "/proposals/bcfc", "destination": "/proposals/BCFC/index.html", "permanent": true },

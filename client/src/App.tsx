@@ -1,13 +1,23 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
+import { lazy, Suspense } from "react";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import RFP from "./pages/RFP";
 import ContactPage from "./pages/ContactPage";
-import BBIntake from "./pages/BBIntake";
+
+const BBIntake = lazy(() => import("./pages/BBIntake"));
+
+function BBIntakeRoute() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#faf8f5]" />}>
+      <BBIntake />
+    </Suspense>
+  );
+}
 
 function Router() {
   return (
@@ -15,7 +25,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/contact"} component={ContactPage} />
       <Route path={"/rfp"} component={RFP} />
-      <Route path={"/proposals/bb/intake"} component={BBIntake} />
+      <Route path={"/proposals/bb/intake"} component={BBIntakeRoute} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
