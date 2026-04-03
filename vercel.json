@@ -4,6 +4,7 @@
   "outputDirectory": "dist",
   "installCommand": "pnpm install",
   "rewrites": [
+    { "source": "/proposals/bb/intake", "destination": "/index.html" },
     { "source": "/vault", "destination": "/vault/index.html" },
     { "source": "/vault/", "destination": "/vault/index.html" },
     { "source": "/proposals/bb/sample", "destination": "/proposals/bb/index.html" },
