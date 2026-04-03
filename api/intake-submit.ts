@@ -71,31 +71,53 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const resend = new Resend(resendKey);
       // Build a clean summary of every form field
       const fieldLabels: Record<string, string> = {
-        brand_heritage: "Brand Heritage",
-        brand_personality: "Brand Personality",
-        brand_story: "Brand Story",
-        target_audience: "Target Audience",
-        current_challenges: "Current Challenges",
-        website_goals: "Website Goals",
-        must_have_features: "Must-Have Features",
-        color_preferences: "Color Preferences",
-        typography_style: "Typography Style",
+        // Section 1: Brand & Heritage
+        business_name: "Business Name",
+        tagline: "Tagline",
+        boutique_feeling: "Boutique Feeling",
+        brand_words: "Brand Words",
+        // Section 2: Typography
+        has_existing_fonts: "Has Existing Fonts",
+        existing_font_description: "Existing Font Description",
+        typography_files: "Typography Files",
+        preferred_font_pairing: "Preferred Font Pairing",
+        fonts_to_avoid: "Fonts to Avoid",
+        // Section 3: Color Palette
+        has_color_palette: "Has Color Palette",
+        color_reference: "Color Reference",
+        color_reference_files: "Color Reference Files",
+        color_mood: "Color Mood",
+        colors_to_avoid: "Colors to Avoid",
+        // Section 4: Photography
+        has_interior_photos: "Has Interior Photos",
+        has_wedding_photos: "Has Wedding Photos",
+        photo_files: "Photo Files",
+        photographer_contacts: "Photographer Contacts",
         visual_inspiration: "Visual Inspiration",
-        photo_style: "Photo Style",
-        gown_display: "Gown Display Preference",
-        collection_categories: "Collection Categories",
-        appointment_booking: "Appointment Booking",
+        // Section 5: Contact & Pages
+        store_hours: "Store Hours",
+        phone: "Phone",
+        email: "Email",
+        contact_preference: "Preferred Contact Method",
+        additional_pages: "Additional Pages Requested",
+        // Section 6: Designers
+        designers: "Designers Carried",
+        featured_designers: "Featured Designers",
+        designer_logo_files: "Designer Logo Files",
+        // Section 7: Real Brides
+        has_bride_stories: "Has Bride Stories",
         bride_stories_approach: "Bride Stories Approach",
+        // Section 8: Hosting
         hosting_preference: "Hosting Preference",
+        // Section 9: Inspiration
         inspiration_urls: "Inspiration URLs",
         non_bridal_inspiration: "Non-Bridal Inspiration",
         social_inspiration: "Social Inspiration",
+        social_inspiration_files: "Social Inspiration Files",
         dont_want: "What They Don't Want",
-        contact_name: "Contact Name",
-        contact_email: "Contact Email",
-        target_launch: "Target Launch Date",
-        budget_range: "Budget Range",
-        additional_notes: "Additional Notes",
+        // Section 10: Anything Else
+        anything_else: "Anything Else",
+        questions_for_us: "Questions for Us",
       };
 
       const formLines = Object.entries(formData)
@@ -126,18 +148,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             </div>
 
             <div style="padding: 24px 32px; background: #fff;">
-              <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #a8b8a8; margin: 0 0 16px;">Form Responses</h2>
+              <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #a8b8a8; margin: 0 0 16px;">Full Submission</h2>
               ${Object.entries(formData)
                 .filter(([, v]) => v && String(v).trim())
                 .map(([key, value]) => {
                   const label = fieldLabels[key] || key.replace(/_/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase());
+                  const strVal = String(value);
+                  // Render file lists as bullet points
+                  const isFiles = key.endsWith("_files");
+                  const display = isFiles
+                    ? strVal.split(", ").filter(Boolean).map((f: string) => `• ${f}`).join("<br/>")
+                    : strVal.replace(/\n/g, "<br/>");
                   return `
-                    <div style="margin-bottom: 20px;">
-                      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: #a8b8a8; margin-bottom: 4px;">${label}</div>
-                      <div style="font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${value}</div>
+                    <div style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #f0ebe5;">
+                      <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #a8b8a8; margin-bottom: 6px;">${label}</div>
+                      <div style="font-size: 14px; line-height: 1.7; color: #2a3a2a;">${display}</div>
                     </div>`;
                 }).join("")}
             </div>
+
+            ${Array.isArray(fileUrls) && fileUrls.length > 0 ? `
+            <div style="padding: 24px 32px; background: #fff; border-top: 1px solid #e8e0d8;">
+              <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #a8b8a8; margin: 0 0 16px;">Uploaded Files</h2>
+              ${fileUrls.map((f: string) => `<div style="font-size: 14px; margin-bottom: 6px;">📎 ${f}</div>`).join("")}
+            </div>` : ""}
 
             <div style="padding: 16px 32px; background: #f5f0eb; font-size: 12px; color: #a8b8a8;">
               Submission ID: ${id} &bull; Saved to Supabase
