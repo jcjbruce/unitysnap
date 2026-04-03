@@ -377,9 +377,9 @@ export default function Intake() {
   const [hostingPreference, setHostingPreference] = useState("");
 
   // Section 9: Inspiration
-  const [inspirationUrl1, setInspirationUrl1] = useState("");
-  const [inspirationUrl2, setInspirationUrl2] = useState("");
-  const [inspirationUrl3, setInspirationUrl3] = useState("");
+  const [inspirationUrl1, setInspirationUrl1] = useState("https://www.");
+  const [inspirationUrl2, setInspirationUrl2] = useState("https://www.");
+  const [inspirationUrl3, setInspirationUrl3] = useState("https://www.");
   const [nonBridalInspiration, setNonBridalInspiration] = useState("");
   const [socialInspiration, setSocialInspiration] = useState("");
   const [socialInspirationFiles, setSocialInspirationFiles] = useState<string[]>([]);
@@ -476,7 +476,7 @@ export default function Intake() {
       // Section 8
       hosting_preference: hostingPreference,
       // Section 9
-      inspiration_urls: [inspirationUrl1, inspirationUrl2, inspirationUrl3].filter(Boolean).join(", "),
+      inspiration_urls: [inspirationUrl1, inspirationUrl2, inspirationUrl3].filter((u) => u && u !== "https://www.").join(", "),
       non_bridal_inspiration: nonBridalInspiration,
       social_inspiration: socialInspiration,
       social_inspiration_files: socialInspirationFiles.join(", "),
@@ -533,13 +533,6 @@ export default function Intake() {
               info@civicfirm.com
             </a>.
           </p>
-          <Link
-            href="/proposals/bb/sample"
-            className="inline-flex items-center gap-2 font-body text-sm tracking-editorial uppercase text-[#a8b8a8] hover:text-[#2a3a2a] transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Proposal
-          </Link>
         </motion.div>
       </div>
     );
@@ -551,13 +544,9 @@ export default function Intake() {
       {/* ─── Sticky Header ─────────────────────────────────────────── */}
       <header className="sticky top-0 z-50 bg-[#faf8f5]/95 backdrop-blur-sm border-b border-[#a8b8a8]/10">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link
-            href="/proposals/bb/sample"
-            className="flex items-center gap-2 font-body text-xs tracking-editorial uppercase text-[#a8b8a8] hover:text-[#2a3a2a] transition-colors"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            Proposal
-          </Link>
+          <span className="font-body text-xs tracking-editorial uppercase text-[#a8b8a8]">
+            Intake Form
+          </span>
           <span className="font-body text-xs tracking-editorial uppercase text-[#a8b8a8]">
             Client Intake
           </span>
