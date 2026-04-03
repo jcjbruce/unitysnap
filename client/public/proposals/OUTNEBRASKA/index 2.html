@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Civic Firm — Web Proposal for OutNebraska</title>
+  <meta name="description" content="A proposal from Civic Firm for the OutNebraska Website Rebuild project. Accessible, community-centered WordPress development." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─────────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:       #632F76;
+      --purple-light: #7d3d94;
+      --purple-dark:  #4a2259;
+      --purple-pale:  #f5eef8;
+      --purple-mid:   #e8d5f0;
+      --ink:          #111827;
+      --ink-mid:      #374151;
+      --ink-soft:     #6b7280;
+      --border:       #e5e7eb;
+      --white:        #ffffff;
+      --off-white:    #fafafa;
+      --green-accent: #4ade80;
+      --dark-bg:      #0f1117;
+      --dark-card:    #1a1f2e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ink);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─────────────────────────────────────────────
+       SKIP LINK (ACCESSIBILITY)
+    ───────────────────────────────────────────── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--purple);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 0 0 6px 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      z-index: 9999;
+      text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ─────────────────────────────────────────────
+       NAVIGATION
+    ───────────────────────────────────────────── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark-bg);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 2rem;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+    }
+    .nav-logo-mark {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green-accent);
+      margin-right: 2px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--purple);
+      color: var(--white) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--purple-light) !important; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* ─────────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────────── */
+    .hero {
+      background: var(--dark-bg);
+      color: var(--white);
+      padding: 6rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,47,118,0.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,47,118,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green-accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 2px;
+      background: var(--green-accent);
+    }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--purple-light);
+    }
+    .hero-sub {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 640px;
+      margin-bottom: 2.5rem;
+      line-height: 1.65;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+    }
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .hero-meta-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .hero-meta-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: 2px solid transparent;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary {
+      background: var(--purple);
+      color: var(--white);
+      border-color: var(--purple);
+    }
+    .btn-primary:hover {
+      background: var(--purple-light);
+      border-color: var(--purple-light);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,0.4);
+    }
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.08);
+    }
+    .btn-purple-outline {
+      background: transparent;
+      color: var(--purple);
+      border-color: var(--purple);
+    }
+    .btn-purple-outline:hover {
+      background: var(--purple);
+      color: var(--white);
+    }
+    .btn-lg {
+      padding: 1rem 2.25rem;
+      font-size: 1.05rem;
+    }
+    .btn-sample {
+      background: var(--purple);
+      color: var(--white);
+      border-color: var(--purple);
+      font-size: 1rem;
+    }
+    .btn-sample:hover {
+      background: var(--purple-light);
+      border-color: var(--purple-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99,47,118,0.35);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION LAYOUT
+    ───────────────────────────────────────────── */
+    .section {
+      padding: 5rem 2rem;
+    }
+    .section-dark {
+      background: var(--dark-bg);
+      color: var(--white);
+    }
+    .section-light {
+      background: var(--off-white);
+    }
+    .section-purple-pale {
+      background: var(--purple-pale);
+    }
+    .section-white {
+      background: var(--white);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .container-narrow {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION HEADERS
+    ───────────────────────────────────────────── */
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 1rem;
+    }
+    .section-eyebrow-light {
+      color: var(--green-accent);
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: currentColor;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+    .section-title-light {
+      color: var(--white);
+    }
+    .section-title em {
+      font-style: normal;
+      color: var(--purple);
+    }
+    .section-title-light em {
+      color: var(--green-accent);
+    }
+    .section-lead {
+      font-size: 1.1rem;
+      color: var(--ink-mid);
+      max-width: 680px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+    .section-lead-light {
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION 1 — ABOUT / INTRO
+    ───────────────────────────────────────────── */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .intro-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    .intro-prose p {
+      margin-bottom: 1.25rem;
+      color: var(--ink-mid);
+      font-size: 1.05rem;
+    }
+    .intro-prose p:last-child { margin-bottom: 0; }
+    .intro-prose strong { color: var(--ink); }
+
+    .credentials-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .credentials-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--purple-mid);
+    }
+    .credential-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--ink-mid);
+    }
+    .credential-item:last-child { margin-bottom: 0; }
+    .credential-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .credential-check svg {
+      width: 11px;
+      height: 11px;
+      fill: none;
+      stroke: white;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .portfolio-links {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .portfolio-links h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 0.75rem;
+    }
+    .portfolio-link-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--purple);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .portfolio-link-item:last-child { border-bottom: none; }
+    .portfolio-link-item:hover { color: var(--purple-dark); }
+    .portfolio-link-item span {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--ink-soft);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION 2 — TECHNICAL APPROACH
+    ───────────────────────────────────────────── */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .tech-card {
+      background: var(--dark-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .tech-card:hover {
+      border-color: rgba(99,47,118,0.5);
+      transform: translateY(-2px);
+    }
+    .tech-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(99,47,118,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .tech-card-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--purple-light);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .tech-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .tech-card p {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.65;
+    }
+    .tech-card .tech-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.3rem 0.75rem;
+      background: rgba(99,47,118,0.3);
+      border: 1px solid rgba(99,47,118,0.5);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--purple-light);
+      letter-spacing: 0.05em;
+    }
+
+    .plugin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+    .plugin-table th {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: rgba(99,47,118,0.2);
+      color: var(--purple-light);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .plugin-table td {
+      padding: 0.75rem 1rem;
+      color: rgba(255,255,255,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      vertical-align: top;
+    }
+    .plugin-table tr:last-child td { border-bottom: none; }
+    .plugin-table tr:hover td { background: rgba(255,255,255,0.03); }
+    .plugin-name { font-weight: 600; color: var(--white); }
+
+    /* ─────────────────────────────────────────────
+       SECTION 3 — TIMELINE
+    ───────────────────────────────────────────── */
+    .timeline {
+      position: relative;
+      padding-left: 3rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--purple), var(--purple-mid));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: -2.85rem;
+      top: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--purple);
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 3px var(--purple-mid);
+    }
+    .timeline-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-phase {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--ink);
+    }
+    .timeline-dates {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--purple);
+      background: var(--purple-pale);
+      padding: 0.2rem 0.65rem;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .timeline-body {
+      font-size: 0.95rem;
+      color: var(--ink-mid);
+      line-height: 1.65;
+    }
+    .timeline-body strong { color: var(--ink); }
+
+    /* ─────────────────────────────────────────────
+       SECTION 4 — BUDGET
+    ───────────────────────────────────────────── */
+    .budget-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .budget-card {
+      max-width: 480px;
+      width: 100%;
+    }
+    @media (max-width: 768px) {
+      .budget-grid { flex-direction: column; align-items: center; }
+    }
+    .budget-card {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .budget-card:hover {
+      border-color: var(--purple);
+      box-shadow: 0 8px 32px rgba(99,47,118,0.12);
+    }
+    .budget-card-header {
+      background: var(--purple);
+      color: var(--white);
+      padding: 1.75rem 2rem;
+    }
+    .budget-card-header.option-b {
+      background: var(--dark-bg);
+    }
+    .budget-option-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 0.5rem;
+    }
+    .budget-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .budget-total {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2.5rem;
+      line-height: 1;
+    }
+    .budget-card-body {
+      padding: 1.75rem 2rem;
+      background: var(--white);
+    }
+    .budget-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .budget-line:last-child { border-bottom: none; }
+    .budget-line-label { color: var(--ink-mid); }
+    .budget-line-amount {
+      font-weight: 700;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+    .budget-line.total-line {
+      border-top: 2px solid var(--purple);
+      border-bottom: none;
+      margin-top: 0.5rem;
+      padding-top: 0.75rem;
+    }
+    .budget-line.total-line .budget-line-label {
+      font-weight: 800;
+      color: var(--ink);
+      font-family: 'Montserrat', sans-serif;
+    }
+    .budget-line.total-line .budget-line-amount {
+      color: var(--purple);
+      font-size: 1.1rem;
+    }
+
+    .retainer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 768px) {
+      .retainer-grid { grid-template-columns: 1fr; }
+    }
+    .retainer-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .retainer-card:hover {
+      border-color: var(--purple);
+      box-shadow: 0 4px 16px rgba(99,47,118,0.1);
+    }
+    .retainer-tier {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+    .retainer-price {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .retainer-period {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      margin-bottom: 1rem;
+    }
+    .retainer-desc {
+      font-size: 0.85rem;
+      color: var(--ink-mid);
+      line-height: 1.55;
+    }
+
+    .payment-note {
+      background: var(--purple-pale);
+      border-left: 4px solid var(--purple);
+      border-radius: 0 12px 12px 0;
+      padding: 1.25rem 1.5rem;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: var(--ink-mid);
+    }
+    .payment-note strong { color: var(--purple); }
+
+    /* ─────────────────────────────────────────────
+       SECTION 5 — LOGISTICS
+    ───────────────────────────────────────────── */
+    .logistics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .logistics-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem;
+      transition: border-color 0.2s;
+    }
+    .logistics-card:hover { border-color: var(--purple); }
+    .logistics-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--purple-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .logistics-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--purple);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .logistics-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .logistics-card p {
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+      line-height: 1.6;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION 6 — CLOSING / CTA
+    ───────────────────────────────────────────── */
+    .closing-section {
+      background: var(--dark-bg);
+      color: var(--white);
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .closing-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,47,118,0.3) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .closing-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .closing-section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .closing-section h2 em {
+      font-style: normal;
+      color: var(--purple-light);
+    }
+    .closing-section p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .closing-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+    .sample-cta-block {
+      margin-top: 3.5rem;
+      padding: 2.5rem;
+      background: rgba(99,47,118,0.2);
+      border: 1px solid rgba(99,47,118,0.4);
+      border-radius: 20px;
+    }
+    .sample-cta-block p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 1.25rem;
+    }
+    .sample-cta-block .btn-sample {
+      font-size: 1.05rem;
+      padding: 1rem 2.25rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    .site-footer {
+      background: #080b10;
+      color: rgba(255,255,255,0.5);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .site-footer a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+    }
+    .site-footer a:hover { color: var(--white); }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.05em;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       DIVIDER
+    ───────────────────────────────────────────── */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ─────────────────────────────────────────────
+       ACCENT RULE
+    ───────────────────────────────────────────── */
+    .accent-rule {
+      display: block;
+      width: 48px;
+      height: 4px;
+      background: var(--purple);
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       PILL TAGS
+    ───────────────────────────────────────────── */
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+    .tag {
+      display: inline-block;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      background: var(--purple-pale);
+      color: var(--purple-dark);
+      border: 1px solid var(--purple-mid);
+    }
+    .tag-dark {
+      background: rgba(99,47,118,0.2);
+      color: var(--purple-light);
+      border-color: rgba(99,47,118,0.4);
+    }
+
+    /* ─────────────────────────────────────────────
+       HIGHLIGHT BOX
+    ───────────────────────────────────────────── */
+    .highlight-box {
+      background: var(--purple-pale);
+      border: 1px solid var(--purple-mid);
+      border-radius: 14px;
+      padding: 1.75rem 2rem;
+      margin: 2rem 0;
+    }
+    .highlight-box p {
+      font-size: 1rem;
+      color: var(--ink-mid);
+      line-height: 1.7;
+    }
+    .highlight-box strong { color: var(--purple-dark); }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .section { padding: 3.5rem 1.25rem; }
+      .hero { padding: 4rem 1.25rem 3.5rem; }
+      .hero-meta { flex-direction: column; gap: 1rem; }
+      .closing-section { padding: 4rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ─── NAVIGATION ─── -->
+  <nav class="site-nav" aria-label="Proposal navigation">
+    <div class="nav-inner">
+      <a href="https://civicfirm.com" class="nav-logo" aria-label="Civic Firm — Home">
+        <span class="nav-logo-mark" aria-hidden="true"></span>
+        CIVIC FIRM
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#technical">Technical Approach</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#budget">Budget</a></li>
+        <li><a href="#closing" class="nav-cta">Get In Touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ─── HERO ─── -->
+    <header class="hero" role="banner">
+      <div class="hero-inner">
+        <p class="hero-eyebrow" aria-label="Section label">Web Proposal — Submitted March 2026</p>
+        <h1>
+          A Website Built for the<br />
+          <em>People Who Need It Most.</em>
+        </h1>
+        <p class="hero-sub">
+          Civic Firm is honored to respond to OutNebraska's RFP for a complete website rebuild. This proposal outlines our approach to building a fast, accessible, and genuinely community-centered WordPress site — one that reflects the full weight of what OutNebraska does for LGBTQ+ Nebraskans every day.
+        </p>
+        <div class="hero-meta" role="region" aria-label="Proposal details">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Submitted To</span>
+            <span class="hero-meta-value">Nia Patterson, OutNebraska</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Submitted By</span>
+            <span class="hero-meta-value">Civic Firm</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Project Kickoff</span>
+            <span class="hero-meta-value">April 1, 2026</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Target Launch</span>
+            <span class="hero-meta-value">Q3 2026</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Budget Range</span>
+            <span class="hero-meta-value">$20,000</span>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <a href="#about" class="btn btn-primary">Read the Proposal</a>
+          <a href="#closing" class="btn btn-outline">Get In Touch</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ─── SECTION 1: ABOUT CIVIC FIRM ─── -->
+    <section class="section section-white" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <p class="section-eyebrow">01 — About Civic Firm</p>
+        <h2 class="section-title" id="about-heading">
+          We build for organizations<br />
+          <em>that serve their communities.</em>
+        </h2>
+        <div class="intro-grid">
+          <div class="intro-prose">
+            <p>
+              Civic Firm is a digital agency specializing in accessible, compliant, and beautifully crafted websites for public-serving organizations — nonprofits, government agencies, school districts, and community institutions. We've been doing this work since 2019, and we've learned that the organizations doing the most important work often have the least room for error when it comes to their digital presence.
+            </p>
+            <p>
+              We understand the nonprofit world from the inside: the stretched budgets, the staff wearing multiple hats, the board members who need to see something polished before they'll sign off, and the constituents who depend on your website to find help when they need it most. We don't treat those realities as obstacles — we build for them.
+            </p>
+            <p>
+              Our WordPress expertise runs deep. We're not generalists who happen to know WordPress — we're specialists who build custom post types, ACF-driven data structures, EveryAction integrations, and performance-optimized front ends that your team can actually manage after we hand over the keys. Staff empowerment isn't a feature we add at the end. It's the point.
+            </p>
+            <p>
+              <strong>WCAG 2.1 AA accessibility is built into our process from day one.</strong> Not audited at the end. Not retrofitted. It's a design requirement, a development standard, and a core part of how we think about every component we build. We use axe DevTools throughout development and document accessibility standards in every staff handoff guide we deliver.
+            </p>
+            <p>
+              We have direct experience integrating EveryAction and similar CRM platforms — embedding forms that feel native to the site, building newsletter signup flows, and connecting event registration to the tools your team already uses. We know the difference between a form that's bolted on and one that belongs.
+            </p>
+            <p>
+              OutNebraska's website isn't just a marketing tool. For LGBTQ+ Nebraskans across the state — in Omaha and Lincoln and in communities where support can be hard to find — it's a front door. It connects people to resources, community, and tools to stand up for their rights. We understand what that means, and we take it seriously. This isn't just another project for us.
+            </p>
+            <div class="tag-list" aria-label="Areas of expertise">
+              <span class="tag">WordPress Expert</span>
+              <span class="tag">WCAG 2.1 AA</span>
+              <span class="tag">EveryAction Integration</span>
+              <span class="tag">ACF Pro</span>
+              <span class="tag">Nonprofit Sector</span>
+              <span class="tag">Kadence Pro</span>
+              <span class="tag">Staff Training</span>
+              <span class="tag">LGBTQ+ Competency</span>
+            </div>
+          </div>
+          <div>
+            <div class="credentials-card">
+              <h3>What We Bring to This Project</h3>
+              <div class="credential-item">
+                <div class="credential-check" aria-hidden="true">
+                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+                </div>
+                <span>Expert-level WordPress custom development — CPTs, ACF, custom queries, and clean semantic output</span>
+              </div>
+              <div class="credential-item">
+                <div class="credential-check" aria-hidden="true">
+                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+                </div>
+                <span>WCAG 2.1 AA accessibility as a built-in practice, not a post-launch checklist</span>
+              </div>
+              <div class="credential-item">
+                <div class="credential-check" aria-hidden="true">
+                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+                </div>
+                <span>EveryAction and CRM integration experience — forms that feel native, not embedded</span>
+              </div>
+              <div class="credential-item">
+                <div class="credential-check" aria-hidden="true">
+                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+                </div>
+                <span>Nonprofit sector expertise — we understand your constraints and your stakes</span>
+              </div>
+              <div class="credential-item">
+                <div class="credential-check" aria-hidden="true">
+                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+                </div>
+                <span>Staff empowerment as a core deliverable — full training and documentation, every project</span>
+              </div>
+              <div class="credential-item">
+                <div class="credential-check" aria-hidden="true">
+                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+                </div>
+                <span>LGBTQ+ cultural competency and genuine alignment with OutNebraska's mission</span>
+              </div>
+              <div class="credential-item">
+                <div class="credential-check" aria-hidden="true">
+                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+                </div>
+                <span>On-time, on-budget delivery — milestone-based process with no surprise scope changes</span>
+              </div>
+
+              <div class="portfolio-links">
+                <h4>Selected Portfolio</h4>
+                <a href="https://civicfirm.com" class="portfolio-link-item" target="_blank" rel="noopener noreferrer">
+                  Tucson Tots <span>— K–12 Early Education Platform</span>
+                </a>
+                <a href="https://civicfirm.com" class="portfolio-link-item" target="_blank" rel="noopener noreferrer">
+                  EagleFeather <span>— National Health Resource Directory</span>
+                </a>
+                <a href="https://civicfirm.com" class="portfolio-link-item" target="_blank" rel="noopener noreferrer">
+                  Visio <span>— Nonprofit Community Media Hub</span>
+                </a>
+                <a href="https://civicfirm.com" class="portfolio-link-item" target="_blank" rel="noopener noreferrer">
+                  Research Circle <span>— Knowledge Mobilization Platform</span>
+                </a>
+                <a href="https://civicfirm.com" class="portfolio-link-item" target="_blank" rel="noopener noreferrer">
+                  UnitySnap <span>— Educational Media Production</span>
+                </a>
+                <p style="font-size:0.8rem;color:var(--ink-soft);margin-top:0.75rem;font-style:italic;">Two writing samples are attached to this PDF submission — both are from previous nonprofit engagements and reflect the tone, voice, and accessibility standards we would bring to OutNebraska's content.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ─── SECTION 2: TECHNICAL APPROACH ─── -->
+    <section class="section section-dark" id="technical" aria-labelledby="technical-heading">
+      <div class="container">
+        <p class="section-eyebrow section-eyebrow-light">02 — Technical Approach</p>
+        <h2 class="section-title section-title-light" id="technical-heading">
+          Built right, from the<br />
+          <em>ground up.</em>
+        </h2>
+        <p class="section-lead section-lead-light">
+          Every technical decision we make is driven by two questions: will this serve OutNebraska's constituents well, and will your staff be able to manage it independently after we're done? Here's how we approach each piece of the build.
+        </p>
+
+        <div class="tech-grid">
+
+          <!-- Page Builder -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            </div>
+            <h3>Page Builder: Kadence Pro</h3>
+            <p>
+              We recommend Kadence Pro over Elementor. The reason is straightforward: Kadence produces a lighter codebase, faster load times, and cleaner semantic HTML — all of which matter for accessibility and performance. Its block-based editing model is more intuitive for non-developers, and it's built for long-term maintainability. Your staff will be able to manage the site independently after training. That's the point.
+            </p>
+            <span class="tech-tag">Recommended over Elementor</span>
+          </div>
+
+          <!-- Bill Tracker -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="12" y2="16"/></svg>
+            </div>
+            <h3>Bill Tracker</h3>
+            <p>
+              We'll keep ACF as the data backbone — your existing ACF structure is a solid reference point and we'll evaluate it during discovery. The front end gets a complete rebuild: a filterable, sortable display using ACF + custom WP_Query with lightweight JavaScript filtering. Clean table or card view. Staff can update it in under two minutes. Constituents can scan it in under ten seconds. That's the goal.
+            </p>
+            <span class="tech-tag">ACF + Custom WP_Query</span>
+          </div>
+
+          <!-- EveryAction -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3>EveryAction Integration</h3>
+            <p>
+              Phase 1: Embed EveryAction forms styled to feel fully native to the site — not obviously embedded. Phase 2: Explore automating data flow via Zapier or direct EveryAction REST API webhooks so form submissions push directly into the CRM without manual export. Newsletter signup connected to EveryAction list. Event registration via EveryAction where applicable. A tasteful, non-intrusive email capture pop-up will be implemented for newsletter signup using MailOptin or a lightweight custom solution — triggered by scroll depth or exit intent, dismissible with one click, and fully keyboard-accessible.
+            </p>
+            <span class="tech-tag">Native-Feel Embeds + API Automation</span>
+          </div>
+
+          <!-- Accessibility -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+            </div>
+            <h3>Accessibility: WCAG 2.1 AA</h3>
+            <p>
+              Accessibility is built in from day one — not audited at the end. Color contrast checked during design. Semantic HTML throughout. Keyboard navigation tested at every milestone. Skip links, ARIA labels, proper heading hierarchy, and alt text standards documented in the staff handoff guide. We use axe DevTools during development. Accessibility is a design requirement, not a compliance checkbox.
+            </p>
+            <span class="tech-tag">WCAG 2.1 AA — Built In, Not Bolted On</span>
+          </div>
+
+          <!-- Performance -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3>Performance</h3>
+            <p>
+              Kadence Pro is lightweight by design. We'll coordinate with your existing Cloudflare setup — not override it. Image optimization via ShortPixel. Lazy loading enabled. Minification and caching via LiteSpeed Cache (SiteGround-native) or WP Rocket. Target: page load under 3 seconds on mobile. We test with GTmetrix and Google PageSpeed Insights before launch.
+            </p>
+            <span class="tech-tag">Target: &lt;3s Mobile Load</span>
+          </div>
+
+          <!-- Event Calendar -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <h3>Event Calendar</h3>
+            <p>
+              The Events Calendar Pro with Community Events add-on for public submission and staff approval workflow. Both list view and calendar view included. "Add to calendar" (.ics / Google Calendar) built in. EveryAction event registration embedded or linked per event. Staff can manage the approval queue without touching code.
+            </p>
+            <span class="tech-tag">Events Calendar Pro + Community Events</span>
+          </div>
+
+          <!-- Resource Directory -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+            </div>
+            <h3>Resource Directory</h3>
+            <p>
+              Searchable and filterable by category, region (local/national/international), and Nebraska geography. ACF-driven structure. Fast, intuitive browsing — minimal clicking to find what you need. Built to be updated by staff without developer involvement. The directory is a lifeline for many of your constituents; it needs to work flawlessly.
+            </p>
+            <span class="tech-tag">ACF-Driven + Staff-Managed</span>
+          </div>
+
+          <!-- Donation Page -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            </div>
+            <h3>Donation Page</h3>
+            <p>
+              The Donation Page is a high-complexity, high-stakes page — it's a direct revenue driver and a moment of trust. The EveryAction donation form will be embedded and styled natively to the site, not as an obvious third-party widget. We'll work with OutNebraska's EveryAction configuration to ensure the form matches the site's visual identity and is fully accessible. Suggested giving amounts, recurring donation options, and mobile optimization are all included.
+            </p>
+            <span class="tech-tag">EveryAction — Native Embed</span>
+          </div>
+
+          <!-- Legislative Session Pages -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <h3>Legislative Session Pages</h3>
+            <p>
+              Campaign-specific pages built to be activated, updated, and archived across legislative sessions without developer involvement. Staff can update bill status, add action alerts, and publish session summaries directly from the WordPress back end. These pages are designed to be fast to update during active sessions and easy to archive when a session ends.
+            </p>
+            <span class="tech-tag">Staff-Managed — Session-Ready</span>
+          </div>
+
+          <!-- Contact Page -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <h3>Contact Page</h3>
+            <p>
+              A clean, accessible contact page with a custom form built in Gravity Forms — the most widely supported form plugin in the nonprofit WordPress ecosystem, with deep EveryAction compatibility and a familiar editing interface for staff. Form submissions routed to the appropriate staff inbox. Spam protection via honeypot and reCAPTCHA. Fully accessible and mobile-optimized.
+            </p>
+            <span class="tech-tag">Gravity Forms — Recommended</span>
+          </div>
+
+          <!-- Content Migration -->
+          <div class="tech-card">
+            <div class="tech-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/><path d="M9 18H5a2 2 0 01-2-2V8a2 2 0 012-2h4"/></svg>
+            </div>
+            <h3>Content Migration</h3>
+            <p>
+              Full export/import with URL mapping. 301 redirects managed via the Redirection plugin — no broken links, no lost SEO equity. All images run through optimization during migration. Existing SEO metadata preserved and improved using Yoast. Blog posts and press statements are treated as separate content types with distinct templates and archives, migrated completely. We document every redirect for your records.
+            </p>
+            <span class="tech-tag">Zero Broken Links — Full SEO Preservation</span>
+          </div>
+
+        </div>
+
+        <!-- Plugin Stack -->
+        <div style="margin-top: 3rem;">
+          <h3 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.1rem;color:var(--white);margin-bottom:1rem;">Recommended Plugin Stack</h3>
+          <table class="plugin-table" aria-label="Recommended WordPress plugins">
+            <thead>
+              <tr>
+                <th scope="col">Plugin</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">License</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="plugin-name">Kadence Blocks Pro</span></td><td>Page builder — lightweight, accessible, block-based</td><td>Covered by Civic Firm</td></tr>
+              <tr><td><span class="plugin-name">ACF Pro</span></td><td>Custom fields for Bill Tracker, Resource Directory, and CPTs</td><td>Client-covered</td></tr>
+              <tr><td><span class="plugin-name">LiteSpeed Cache / WP Rocket</span></td><td>Performance optimization — caching, minification</td><td>Client-covered</td></tr>
+              <tr><td><span class="plugin-name">ShortPixel</span></td><td>Image optimization and compression</td><td>Client-covered</td></tr>
+              <tr><td><span class="plugin-name">Yoast SEO</span></td><td>SEO fundamentals, metadata, XML sitemaps</td><td>Client-covered</td></tr>
+              <tr><td><span class="plugin-name">The Events Calendar Pro + Community Events</span></td><td>Event calendar with public submission workflow</td><td>Client-covered</td></tr>
+              <tr><td><span class="plugin-name">Redirection</span></td><td>301 redirect management during migration</td><td>Free</td></tr>
+              <tr><td><span class="plugin-name">WP Mail SMTP</span></td><td>Reliable email delivery for forms and notifications</td><td>Free</td></tr>
+              <tr><td><span class="plugin-name">MainWP / ManageWP</span></td><td>Ongoing maintenance and monitoring</td><td>Included in retainer</td></tr>
+              <tr><td><span class="plugin-name">Gravity Forms</span></td><td>Contact, intake, and volunteer forms — deep EveryAction compatibility, familiar staff interface</td><td>Client-covered</td></tr>
+              <tr><td><span class="plugin-name">Google Site Kit</span></td><td>Google Analytics integration with goal tracking, directly in WP dashboard</td><td>Free</td></tr>
+              <tr><td><span class="plugin-name">Smash Balloon Suite</span></td><td>Social media feed integrations — Instagram, Facebook, LinkedIn, and Threads (all four platforms required by RFP)</td><td>Client-covered</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── SECTION 3: TIMELINE ─── -->
+    <section class="section section-light" id="timeline" aria-labelledby="timeline-heading">
+      <div class="container">
+        <p class="section-eyebrow">03 — Project Timeline</p>
+        <h2 class="section-title" id="timeline-heading">
+          Eight milestones.<br />
+          <em>No surprises.</em>
+        </h2>
+        <p class="section-lead">
+          Every project we deliver follows a structured, milestone-based process with clear checkpoints and documented deliverables at every stage. Here's how we get from kickoff to launch for OutNebraska.
+        </p>
+
+        <div class="timeline" role="list">
+
+          <div class="timeline-item" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-header">
+              <span class="timeline-phase">Discovery &amp; Architecture</span>
+              <span class="timeline-dates">Weeks 1–2 · April 1–14, 2026</span>
+            </div>
+            <p class="timeline-body">
+              Stakeholder calls, content inventory review, sitemap and information architecture finalization, ACF field planning, and plugin stack confirmation. <strong>What we need from OutNebraska:</strong> access to the current site, analytics data, brand guidelines, and EveryAction account details.
+            </p>
+          </div>
+
+          <div class="timeline-item" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-header">
+              <span class="timeline-phase">Design in Figma</span>
+              <span class="timeline-dates">Weeks 3–5 · April 15 – May 5, 2026</span>
+            </div>
+            <p class="timeline-body">
+              Full design comps for all high-complexity pages. Two rounds of revisions included. <strong>Sign-off required before development begins.</strong> You approve every major decision before a line of code is written.
+            </p>
+          </div>
+
+          <div class="timeline-item" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-header">
+              <span class="timeline-phase">Development on Staging</span>
+              <span class="timeline-dates">Weeks 6–13 · May 6 – June 30, 2026</span>
+            </div>
+            <p class="timeline-body">
+              WordPress build on SiteGround staging environment. Custom post types, ACF fields, EveryAction integrations, Bill Tracker, Resource Directory, Event Calendar, Donation Page (native EveryAction embed), Legislative Session Pages, Contact Page (Gravity Forms), and all page templates. <strong>Weekly progress updates</strong> throughout development.
+            </p>
+          </div>
+
+          <div class="timeline-item" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-header">
+              <span class="timeline-phase">Content Migration &amp; Population</span>
+              <span class="timeline-dates">Weeks 14–15 · July 1–14, 2026</span>
+            </div>
+            <p class="timeline-body">
+              Migration of existing content, press statements, and news posts. 301 redirects configured. Image optimization applied during migration. URL preservation verified and documented.
+            </p>
+          </div>
+
+          <div class="timeline-item" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-header">
+              <span class="timeline-phase">QA, Accessibility Audit &amp; Performance Testing</span>
+              <span class="timeline-dates">Week 16 · July 15–21, 2026</span>
+            </div>
+            <p class="timeline-body">
+              Full cross-browser and cross-device QA. axe DevTools accessibility audit. GTmetrix and PageSpeed Insights testing. All issues resolved before handoff — nothing ships with known problems.
+            </p>
+          </div>
+
+          <div class="timeline-item" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-header">
+              <span class="timeline-phase">Staff Training</span>
+              <span class="timeline-dates">Week 17 · July 22–28, 2026</span>
+            </div>
+            <p class="timeline-body">
+              Two to three sessions with two to three staff members. Covers back-end management, content editing, event calendar, bill tracker, and site settings. <strong>Written documentation and video walkthroughs delivered</strong> — so your team has a reference long after training ends.
+            </p>
+          </div>
+
+          <div class="timeline-item" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-header">
+              <span class="timeline-phase">Launch</span>
+              <span class="timeline-dates">Target: Mid–Late Q3 2026 (Q4 2026 if needed)</span>
+            </div>
+            <p class="timeline-body">
+              DNS cutover coordinated with SiteGround and Cloudflare. 30-day stabilization period included. We stay close through go-live and the weeks that follow.
+            </p>
+          </div>
+
+          <div class="timeline-item" role="listitem">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-header">
+              <span class="timeline-phase">Post-Launch Support</span>
+              <span class="timeline-dates">90 Days Post-Launch</span>
+            </div>
+            <p class="timeline-body">
+              Developer remains available for questions, fixes, and minor adjustments. You're not on your own the moment the site goes live.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ─── SECTION 4: BUDGET ─── -->
+    <section class="section section-white" id="budget" aria-labelledby="budget-heading">
+      <div class="container">
+        <p class="section-eyebrow">04 — Investment</p>
+        <h2 class="section-title" id="budget-heading">
+          Two options.<br />
+          <em>One recommendation.</em>
+        </h2>
+        <p class="section-lead">
+          We're presenting two options as requested by the RFP. We recommend Option A — copywriting is not an add-on for an organization like OutNebraska. Authentic, mission-aligned copy is what makes a website work for the people who need it most. Both options include the same development scope, accessibility standards, and 90-day post-launch support.
+        </p>
+
+        <div class="budget-grid" style="justify-content:center;gap:2rem;">
+
+          <!-- Option A: With Copywriting (Recommended) -->
+          <div class="budget-card" style="max-width:480px;">
+            <div class="budget-card-header" style="position:relative;">
+              <p class="budget-option-label">Option A — Recommended</p>
+              <p class="budget-card-title">With Copywriting</p>
+              <p class="budget-total">$20,000</p>
+              <span style="position:absolute;top:1rem;right:1.25rem;background:var(--green-accent);color:#111;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:0.25rem 0.6rem;border-radius:20px;">Our Recommendation</span>
+            </div>
+            <div class="budget-card-body">
+              <div class="budget-line" style="font-size:0.8rem;color:var(--ink-soft);border-bottom:1px solid var(--border);padding-bottom:0.5rem;margin-bottom:0.25rem;">
+                <span style="font-weight:700;color:var(--ink-mid);">Line Item</span>
+                <span style="font-weight:700;color:var(--ink-mid);">Est. Hours</span>
+                <span style="font-weight:700;color:var(--ink-mid);">Amount</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Discovery &amp; Strategy</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~10 hrs</span>
+                <span class="budget-line-amount">$1,500</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">UX/Design (Figma)</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~20 hrs</span>
+                <span class="budget-line-amount">$2,500</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">WordPress Development</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~80 hrs</span>
+                <span class="budget-line-amount">$10,000</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Copywriting</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~28 hrs</span>
+                <span class="budget-line-amount">$3,500</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Content Migration</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~8 hrs</span>
+                <span class="budget-line-amount">$1,000</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Training &amp; Documentation</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~6 hrs</span>
+                <span class="budget-line-amount">$750</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Post-Launch Support (90 days)</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~6 hrs</span>
+                <span class="budget-line-amount">$750</span>
+              </div>
+              <div class="budget-line total-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Total</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~158 hrs</span>
+                <span class="budget-line-amount">$20,000</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Option B: Without Copywriting -->
+          <div class="budget-card" style="max-width:480px;">
+            <div class="budget-card-header option-b">
+              <p class="budget-option-label">Option B</p>
+              <p class="budget-card-title">Without Copywriting</p>
+              <p class="budget-total">$16,500</p>
+            </div>
+            <div class="budget-card-body">
+              <div class="budget-line" style="font-size:0.8rem;color:var(--ink-soft);border-bottom:1px solid var(--border);padding-bottom:0.5rem;margin-bottom:0.25rem;">
+                <span style="font-weight:700;color:var(--ink-mid);">Line Item</span>
+                <span style="font-weight:700;color:var(--ink-mid);">Est. Hours</span>
+                <span style="font-weight:700;color:var(--ink-mid);">Amount</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Discovery &amp; Strategy</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~10 hrs</span>
+                <span class="budget-line-amount">$1,500</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">UX/Design (Figma)</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~20 hrs</span>
+                <span class="budget-line-amount">$2,500</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">WordPress Development</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~80 hrs</span>
+                <span class="budget-line-amount">$10,000</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;opacity:0.45;text-decoration:line-through;">
+                <span class="budget-line-label">Copywriting</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">—</span>
+                <span class="budget-line-amount">$3,500</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Content Migration</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~8 hrs</span>
+                <span class="budget-line-amount">$1,000</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Training &amp; Documentation</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~6 hrs</span>
+                <span class="budget-line-amount">$750</span>
+              </div>
+              <div class="budget-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Post-Launch Support (90 days)</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~6 hrs</span>
+                <span class="budget-line-amount">$750</span>
+              </div>
+              <div class="budget-line total-line" style="display:grid;grid-template-columns:1fr auto auto;gap:0.5rem;">
+                <span class="budget-line-label">Total</span>
+                <span style="color:var(--ink-soft);font-size:0.85rem;">~130 hrs</span>
+                <span class="budget-line-amount">$16,500</span>
+              </div>
+              <p style="font-size:0.8rem;color:var(--ink-soft);margin-top:1rem;font-style:italic;">OutNebraska provides all copy. Civic Firm will review for tone and accessibility but will not write or substantially edit content under this option.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="payment-note" role="note">
+          <strong>Payment Schedule:</strong> 33% at kickoff / 33% at midpoint milestone / 33% at launch — as proposed in the RFP. Premium plugin licenses (ACF Pro, Events Calendar Pro, etc.) are covered by OutNebraska per the RFP. Kadence Pro license is covered by Civic Firm.
+        </div>
+
+        <!-- Retainer Options -->
+        <div style="margin-top: 3.5rem;">
+          <h3 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.25rem;color:var(--ink);margin-bottom:0.5rem;">Post-Launch Retainer Options</h3>
+          <p style="color:var(--ink-mid);font-size:0.95rem;margin-bottom:0;max-width:600px;">Our relationship doesn't end at launch. Optional monthly retainers keep your site secure, updated, and performing.</p>
+          <div class="retainer-grid">
+            <div class="retainer-card">
+              <p class="retainer-tier">Basic</p>
+              <p class="retainer-price">$150</p>
+              <p class="retainer-period">per month</p>
+              <p class="retainer-desc">Uptime monitoring, plugin updates, and security patches. Your site stays healthy without any effort from your team.</p>
+            </div>
+            <div class="retainer-card" style="border-color:var(--purple);box-shadow:0 4px 16px rgba(99,47,118,0.1);">
+              <p class="retainer-tier">Standard</p>
+              <p class="retainer-price">$250</p>
+              <p class="retainer-period">per month</p>
+              <p class="retainer-desc">Everything in Basic, plus 2 hours of support and fixes per month. For organizations that want a developer on call.</p>
+            </div>
+            <div class="retainer-card">
+              <p class="retainer-tier">Full Partner</p>
+              <p class="retainer-price">$400</p>
+              <p class="retainer-period">per month</p>
+              <p class="retainer-desc">Everything in Standard, plus priority response, monthly analytics report, and proactive recommendations from your dedicated developer.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ─── SECTION 5: LOGISTICS ─── -->
+    <section class="section section-light" id="logistics" aria-labelledby="logistics-heading">
+      <div class="container">
+        <p class="section-eyebrow">05 — How We Work</p>
+        <h2 class="section-title" id="logistics-heading">
+          Transparent process.<br />
+          <em>Real partnership.</em>
+        </h2>
+        <p class="section-lead">
+          We believe the best client relationships are built on clear communication, honest expectations, and consistent follow-through. Here's what working with Civic Firm actually looks like.
+        </p>
+
+        <div class="logistics-grid">
+
+          <div class="logistics-card">
+            <div class="logistics-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3>Who Does the Work</h3>
+            <p>Work is performed by Civic Firm directly. The design phase may involve a trusted collaborator; any subcontractors will be disclosed and vetted before engagement. You'll always know who's working on your project.</p>
+          </div>
+
+          <div class="logistics-card">
+            <div class="logistics-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <h3>Communication</h3>
+            <p>Weekly check-ins via video call or async update. Slack or email preferred. 24-hour response SLA on business days. We don't disappear between milestones — you'll always know where things stand.</p>
+          </div>
+
+          <div class="logistics-card">
+            <div class="logistics-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3>Availability &amp; Time Zone</h3>
+            <p>Remote-first, North America. Available during standard business hours (Central Time) with flexibility for stakeholder calls across time zones. Emergency post-launch support available outside business hours.</p>
+          </div>
+
+          <div class="logistics-card">
+            <div class="logistics-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            </div>
+            <h3>Payment Schedule</h3>
+            <p>33% at kickoff / 33% at midpoint milestone / 33% at launch — confirmed and accepted as proposed in the RFP. No surprise invoices. Milestone-based billing keeps everyone aligned.</p>
+          </div>
+
+          <div class="logistics-card">
+            <div class="logistics-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <h3>Scope Changes</h3>
+            <p>Any work outside the agreed scope requires a written change order before it begins — no surprises on either side. Out-of-scope work is billed at an agreed hourly rate of $95/hr. If anything emerges during development that could affect timeline or budget, we flag it immediately and collaboratively decide how to proceed before moving forward.</p>
+          </div>
+
+          <div class="logistics-card">
+            <div class="logistics-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <h3>Feedback &amp; Revision Cycles</h3>
+            <p>During development, you review the site on a live staging URL at each milestone checkpoint. Feedback is collected async via a shared document or Loom video — no need for a live call unless you prefer it. Two rounds of revisions are included per milestone. Additional revision rounds are available at the agreed hourly rate. Turnaround on revisions is typically 3–5 business days.</p>
+          </div>
+
+          <div class="logistics-card">
+            <div class="logistics-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Post-Launch Stability</h3>
+            <p>90-day post-launch support period included in all options. Developer remains available for questions, fixes, and minor adjustments. We're not done when the site goes live — we're done when you're confident.</p>
+          </div>
+
+          <div class="logistics-card">
+            <div class="logistics-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3>Platform Constraints</h3>
+            <p>WordPress on SiteGround — confirmed and non-negotiable, as specified in the RFP. We work within your existing infrastructure, not around it. Cloudflare configuration will be coordinated, not overridden.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 6: CLOSING ─── -->
+    <section class="closing-section" id="closing" aria-labelledby="closing-heading">
+      <div class="closing-inner">
+        <p class="hero-eyebrow" style="justify-content:center;margin-bottom:1.5rem;" aria-label="Section label">06 — Let's Build Something That Matters</p>
+        <h2 id="closing-heading">
+          OutNebraska deserves a website<br />
+          <em>as strong as its mission.</em>
+        </h2>
+        <p>
+          We've read the RFP carefully. We've looked at what OutNebraska does, who it serves, and what's at stake when the website works — and when it doesn't. We're not responding to this as a contract opportunity. We're responding because this is exactly the kind of work we built Civic Firm to do.
+        </p>
+        <p>
+          A website that connects LGBTQ+ Nebraskans to resources, community, and tools to advocate for themselves — that's not a project we take lightly. We'd be honored to build it with you.
+        </p>
+        <p>
+          We're ready to move quickly. Kickoff April 1 is achievable. Let's talk.
+        </p>
+        <div class="closing-actions">
+          <a href="mailto:info@civicfirm.com?subject=OutNebraska%20Web%20Proposal%20%E2%80%94%20Let%27s%20Talk" class="btn btn-primary btn-lg">
+            Email Us to Get Started
+          </a>
+          <a href="https://civicfirm.com" class="btn btn-outline btn-lg" target="_blank" rel="noopener noreferrer">
+            Visit Civic Firm →
+          </a>
+        </div>
+
+
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <span class="footer-logo">· CIVIC FIRM</span>
+      <span>Proposal prepared for OutNebraska · March 2026</span>
+      <div class="footer-links">
+        <a href="https://civicfirm.com" target="_blank" rel="noopener noreferrer">civicfirm.com</a>
+        <a href="mailto:info@civicfirm.com">info@civicfirm.com</a>
+        <a href="https://civicfirm.com/accessibility" target="_blank" rel="noopener noreferrer">Accessibility</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

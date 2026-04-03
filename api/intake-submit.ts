@@ -129,6 +129,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           { key: "anything_else", label: "Anything important about Becker's we should know before we start?" },
           { key: "questions_for_us", label: "Any questions for us?" },
         ]},
+        { title: "Service Agreement", fields: [
+          { key: "agreement_signatory", label: "Signed by" },
+          { key: "agreement_title", label: "Title / Role" },
+          { key: "agreement_accepted", label: "Agreement accepted" },
+          { key: "agreement_date", label: "Date signed" },
+        ]},
       ];
 
       const sectionStyle = `font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: #c9b99a; margin: 0 0 20px; padding-top: 8px;`;

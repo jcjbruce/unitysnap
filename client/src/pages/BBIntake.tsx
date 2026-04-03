@@ -413,6 +413,12 @@ export default function Intake() {
   const [anythingElse, setAnythingElse] = useState("");
   const [questionsForUs, setQuestionsForUs] = useState("");
 
+  // Contract / Agreement
+  const [signatoryName, setSignatoryName] = useState("");
+  const [signatoryTitle, setSignatoryTitle] = useState("");
+  const [agreementAccepted, setAgreementAccepted] = useState(false);
+  const [contractError, setContractError] = useState("");
+
   // ─── Submit via serverless API ──────────────────────────────────
 
   // ─── Load extra fonts for the pairing preview ────────────────────
@@ -455,6 +461,15 @@ export default function Intake() {
   // ─── Submit Handler ──────────────────────────────────────────────
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Require agreement signature
+    if (!agreementAccepted || !signatoryName.trim()) {
+      setContractError("Please read the agreement, enter your full legal name, and check the box to proceed.");
+      const el = document.getElementById("agreement-section");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    setContractError("");
     setSubmitting(true);
     setError("");
 
@@ -508,6 +523,11 @@ export default function Intake() {
       // Section 10
       anything_else: anythingElse,
       questions_for_us: questionsForUs,
+      // Agreement
+      agreement_signatory: signatoryName,
+      agreement_title: signatoryTitle,
+      agreement_accepted: agreementAccepted ? "Yes — agreed and signed" : "Not signed",
+      agreement_date: new Date().toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" }),
     };
 
     try {
@@ -1170,6 +1190,108 @@ export default function Intake() {
               to get started.
             </p>
           </div>
+        </motion.div>
+
+        {/* ── Service Agreement ──────────────────────────────────────── */}
+        <motion.div
+          id="agreement-section"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="mt-16 bg-white border border-[#a8b8a8]/15 p-8 md:p-10"
+        >
+          <p className="font-body text-xs tracking-editorial uppercase text-[#c9b99a] mb-6">
+            Service Agreement
+          </p>
+
+          <div className="font-body text-sm text-[#4a5a4a] leading-relaxed space-y-4 mb-8">
+            <p>
+              This Service Agreement ("Agreement") is entered into between <strong className="text-[#2a3a2a]">Civic Firm</strong> ("Provider"), operated by Jason Bruce, and the undersigned client ("Client") for the design and development of a custom website.
+            </p>
+
+            <p className="font-medium text-[#2a3a2a] text-xs tracking-editorial uppercase mt-6 mb-2">1. Scope of Work</p>
+            <p>
+              Provider will design and develop a custom website for Client based on the preferences and materials submitted through this intake form. The project includes initial design, content integration, up to two rounds of revisions based on client feedback, and deployment to a live domain.
+            </p>
+
+            <p className="font-medium text-[#2a3a2a] text-xs tracking-editorial uppercase mt-6 mb-2">2. Project Fee &amp; Payment Schedule</p>
+            <p>
+              The total project fee is <strong className="text-[#2a3a2a]">$4,500 CAD</strong>, payable in three installments:
+            </p>
+            <div className="pl-4 space-y-1 my-3">
+              <p>• <strong className="text-[#2a3a2a]">40% ($1,800)</strong> — Due upon signing this agreement to begin work</p>
+              <p>• <strong className="text-[#2a3a2a]">30% ($1,350)</strong> — Due upon delivery of the first draft</p>
+              <p>• <strong className="text-[#2a3a2a]">30% ($1,350)</strong> — Due upon final approval and handover</p>
+            </div>
+            <p>
+              Payments are to be made via e-transfer to <strong className="text-[#2a3a2a]">rezaamari@gmail.com</strong>.
+            </p>
+
+            <p className="font-medium text-[#2a3a2a] text-xs tracking-editorial uppercase mt-6 mb-2">3. Timeline</p>
+            <p>
+              Work will commence upon receipt of the initial deposit and completed intake form. Provider will deliver the first draft within a reasonable timeframe and will communicate expected milestones throughout the project.
+            </p>
+
+            <p className="font-medium text-[#2a3a2a] text-xs tracking-editorial uppercase mt-6 mb-2">4. Client Responsibilities</p>
+            <p>
+              Client agrees to provide all requested content, brand materials, photography, and feedback in a timely manner. Delays in providing materials may impact the project timeline.
+            </p>
+
+            <p className="font-medium text-[#2a3a2a] text-xs tracking-editorial uppercase mt-6 mb-2">5. Intellectual Property</p>
+            <p>
+              Upon receipt of full payment, all rights to the final website design and code are transferred to Client. Provider retains the right to display the work in its portfolio.
+            </p>
+
+            <p className="font-medium text-[#2a3a2a] text-xs tracking-editorial uppercase mt-6 mb-2">6. Cancellation</p>
+            <p>
+              If Client cancels the project after work has begun, all payments made to date are non-refundable. Any completed work up to the point of cancellation will be delivered to Client.
+            </p>
+          </div>
+
+          {/* Signature fields */}
+          <div className="pt-6 border-t border-[#a8b8a8]/15 space-y-4">
+            <div>
+              <label className="block font-body text-xs text-[#6b7b6b] mb-1.5">Full Legal Name</label>
+              <input
+                type="text"
+                value={signatoryName}
+                onChange={(e) => setSignatoryName(e.target.value)}
+                placeholder="Enter your full legal name"
+                className="w-full px-4 py-3 bg-[#faf8f5] border border-[#a8b8a8]/20 font-body text-sm text-[#2a3a2a] placeholder:text-[#a8b8a8] focus:outline-none focus:border-[#a8b8a8]/50"
+              />
+            </div>
+            <div>
+              <label className="block font-body text-xs text-[#6b7b6b] mb-1.5">Title / Role (optional)</label>
+              <input
+                type="text"
+                value={signatoryTitle}
+                onChange={(e) => setSignatoryTitle(e.target.value)}
+                placeholder="e.g. Owner, Manager"
+                className="w-full px-4 py-3 bg-[#faf8f5] border border-[#a8b8a8]/20 font-body text-sm text-[#2a3a2a] placeholder:text-[#a8b8a8] focus:outline-none focus:border-[#a8b8a8]/50"
+              />
+            </div>
+            <label className="flex items-start gap-3 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={agreementAccepted}
+                onChange={(e) => setAgreementAccepted(e.target.checked)}
+                className="mt-1 w-4 h-4 accent-[#6b8b6b]"
+              />
+              <span className="font-body text-sm text-[#4a5a4a] leading-relaxed">
+                I have read and agree to the terms of this Service Agreement. I understand that by typing my name above and checking this box, I am providing my electronic signature, which is legally binding.
+              </span>
+            </label>
+            <p className="font-body text-xs text-[#a8b8a8]">
+              Date: {new Date().toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })}
+            </p>
+          </div>
+
+          {contractError && (
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 text-red-700 font-body text-sm">
+              {contractError}
+            </div>
+          )}
         </motion.div>
 
         {/* ── Error Message ─────────────────────────────────────────── */}
