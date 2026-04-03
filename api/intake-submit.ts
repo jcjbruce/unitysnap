@@ -143,10 +143,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               ? val.split(", ").filter(Boolean).map((fileUrl: string) => {
                   const fileName = decodeURIComponent(fileUrl.split("/").pop() || fileUrl).replace(/^[a-zA-Z0-9_-]{10}-/, "");
                   if (fileUrl.startsWith("http")) {
-                    return `📎 <a href="${fileUrl}" style="color: #4a5a4a; text-decoration: underline;">${fileName}</a>`;
+                    const isImage = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(fileName);
+                    if (isImage) {
+                      return `
+                        <div style="margin-bottom: 12px;">
+                          <a href="${fileUrl}" style="display: block;">
+                            <img src="${fileUrl}" alt="${fileName}" style="max-width: 100%; max-height: 300px; border: 1px solid #e8e0d8; border-radius: 4px;" />
+                          </a>
+                          <div style="font-size: 11px; color: #a8b8a8; margin-top: 4px;">${fileName}</div>
+                        </div>`;
+                    }
+                    return `<div style="margin-bottom: 8px;">📎 <a href="${fileUrl}" style="color: #4a5a4a; text-decoration: underline;">${fileName}</a></div>`;
                   }
-                  return `📎 ${fileName}`;
-                }).join("<br/>")
+                  return `<div style="margin-bottom: 8px;">📎 ${fileName}</div>`;
+                }).join("")
               : val.replace(/\n/g, "<br/>");
             return `<div style="${labelStyle}">${f.label}</div><div style="${valueStyle}">${display}</div>`;
           }).join("");
@@ -185,6 +195,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
               <h2 style="${sectionStyle}">All Uploaded Files</h2>
               ${fileUrls.map((f: string) => {
                 const name = decodeURIComponent(f.split("/").pop() || f).replace(/^[a-zA-Z0-9_-]{10}-/, "");
+                const isImage = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(name);
+                if (f.startsWith("http") && isImage) {
+                  return `
+                    <div style="margin-bottom: 16px;">
+                      <a href="${f}" style="display: block;">
+                        <img src="${f}" alt="${name}" style="max-width: 100%; max-height: 250px; border: 1px solid #e8e0d8; border-radius: 4px;" />
+                      </a>
+                      <div style="font-size: 11px; color: #a8b8a8; margin-top: 4px;">${name}</div>
+                    </div>`;
+                }
                 if (f.startsWith("http")) {
                   return `<div style="font-size: 14px; margin-bottom: 6px;">📎 <a href="${f}" style="color: #4a5a4a; text-decoration: underline;">${name}</a></div>`;
                 }
