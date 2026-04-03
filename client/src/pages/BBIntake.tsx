@@ -6,6 +6,8 @@
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "wouter";
+import { nanoid } from "nanoid";
+import { supabase } from "@/lib/supabase";
 import {
   ArrowLeft,
   Check,
@@ -78,32 +80,25 @@ function FileUpload({
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList[i];
       try {
-        // Convert file to base64
-        const base64 = await new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve((reader.result as string).split(",")[1]);
-          reader.onerror = reject;
-          reader.readAsDataURL(file);
-        });
+        const id = nanoid(10);
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const path = `intake/${id}-${safeName}`;
 
-        // Upload to server API → Supabase Storage
-        const res = await fetch("/api/intake-upload", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            fileName: file.name,
-            fileType: file.type,
-            fileData: base64,
-          }),
-        });
+        const { error } = await supabase.storage
+          .from("intake-uploads")
+          .upload(path, file, { contentType: file.type, upsert: false });
 
-        if (res.ok) {
-          const data = await res.json();
-          newFiles.push({ name: file.name, url: data.url });
-        } else {
-          console.error(`Upload failed for ${file.name}`);
+        if (error) {
+          console.error(`Upload failed for ${file.name}:`, error.message);
           newFiles.push({ name: `${file.name} (upload failed)`, url: "" });
+          continue;
         }
+
+        const { data: urlData } = supabase.storage
+          .from("intake-uploads")
+          .getPublicUrl(path);
+
+        newFiles.push({ name: file.name, url: urlData.publicUrl });
       } catch (err) {
         console.error(`Upload error for ${file.name}:`, err);
         newFiles.push({ name: `${file.name} (upload failed)`, url: "" });
