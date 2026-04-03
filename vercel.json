@@ -6,6 +6,10 @@
   "rewrites": [
     { "source": "/bb/intake", "destination": "/index.html" },
     { "source": "/bb/intake/", "destination": "/index.html" },
+    { "source": "/bb/proposal", "destination": "/bb/proposal/index.html" },
+    { "source": "/bb/proposal/", "destination": "/bb/proposal/index.html" },
+    { "source": "/bb/sample", "destination": "/bb/proposal/index.html" },
+    { "source": "/bb/sample/", "destination": "/bb/proposal/index.html" },
     { "source": "/vault", "destination": "/vault/index.html" },
     { "source": "/vault/", "destination": "/vault/index.html" },
     { "source": "/gtalenders", "destination": "/gtalenders/index.html" },
@@ -13,6 +17,8 @@
     { "source": "/gtalenders/:path*", "destination": "/gtalenders/index.html" }
   ],
   "redirects": [
+    { "source": "/bb", "destination": "/bb/proposal", "permanent": false },
+    { "source": "/bb/", "destination": "/bb/proposal", "permanent": false },
     { "source": "/proposals/bb", "destination": "/bb/proposal", "permanent": false },
     { "source": "/proposals/bb/", "destination": "/bb/proposal", "permanent": false },
     { "source": "/proposals/bb/index.html", "destination": "/bb/proposal", "permanent": false },
