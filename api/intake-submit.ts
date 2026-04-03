@@ -153,7 +153,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }).filter(Boolean).join("");
 
       await resend.emails.send({
-        from: "Civic Firm Intake <onboarding@resend.dev>",
+        from: "Civic Firm Intake <intake@civicfirm.com>",
         to: "info@civicfirm.com",
         subject: `New Intake: ${businessName || "Unknown"}`,
         html: `
