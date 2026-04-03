@@ -25,7 +25,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/contact"} component={ContactPage} />
       <Route path={"/rfp"} component={RFP} />
-      <Route path={"/proposals/bb/intake"} component={BBIntakeRoute} />
+      <Route path={"/bb/intake"} component={BBIntakeRoute} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

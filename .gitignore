@@ -111,3 +111,4 @@ server/
 shared/
 client/src/components/ManusDialog.tsx
 client/public/__manus__/
+.env*.local
