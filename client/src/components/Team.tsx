@@ -17,9 +17,9 @@ const team = [
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/CU5JQUQHP3FutNoS5xA4np/jason-bruce_24906696.png",
   },
   {
-    name: "Dr. Marisol Navarrete",
+    name: "Dr. Marisol Campos Navarrete",
     role: "Director of Content & Instructional Design",
-    bio: "Leads content architecture, instructional design, and CMS training programs. Ensures every site is structured for clarity, usability, and long-term maintainability.",
+    bio: "Scientific associate researcher with a PhD, MA, and BEng specializing in Indigenous-led research, participatory approaches, and health equity. Leads content architecture, instructional design, and culturally grounded frameworks across all projects.",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/CU5JQUQHP3FutNoS5xA4np/marisol-navarrete_4717efd6.png",
   },
   {
