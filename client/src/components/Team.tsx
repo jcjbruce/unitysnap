@@ -18,8 +18,8 @@ const team = [
   },
   {
     name: "Dr. Marisol Campos Navarrete",
-    role: "Director of Content & Instructional Design",
-    bio: "Leads content architecture, instructional design, and CMS training across all projects. Brings a research background in health equity and participatory design to ensure every deliverable is culturally grounded and community-informed.",
+    role: "Co-Founder & Director of Content & Instructional Design",
+    bio: "Leads content architecture, instructional design, and user-focused content strategy across all projects. Specializes in translating complex subject matter into clear, accessible digital experiences for public and institutional audiences.",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/CU5JQUQHP3FutNoS5xA4np/marisol-navarrete_4717efd6.png",
   },
   {
