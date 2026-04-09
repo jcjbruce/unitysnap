@@ -25,7 +25,7 @@ const projects = [
     sector: "Health Equity & AI Research",
     descriptor: "Indigenous-led health AI research hub",
     summary:
-      "A research platform co-designing equitable AI-enabled healthcare systems through Indigenous-led, community-grounded participatory approaches and intercultural collaboration.",
+      "A research platform co-designing equitable AI-enabled healthcare systems through Indigenous-led, community-grounded participatory approaches and cross-cultural collaboration.",
     image: "/portfolio/kinshipai-hero.png",
     url: "https://kinshipai.org",
     accent: "#2dd4a8",
