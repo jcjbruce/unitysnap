@@ -12,7 +12,7 @@ const team = [
   /* ── Row 1 ── */
   {
     name: "Dr. Jason Bruce",
-    role: "Founder & Chief Executive Officer",
+    role: "Co-Founder & Chief Executive Officer",
     bio: "Leads all client strategy, institutional partnerships, and business development. Specialist in accessible digital transformation for public-sector organizations across North America.",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/CU5JQUQHP3FutNoS5xA4np/jason-bruce_24906696.png",
   },
