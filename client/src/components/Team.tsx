@@ -19,7 +19,7 @@ const team = [
   {
     name: "Dr. Marisol Campos Navarrete",
     role: "Director of Content & Instructional Design",
-    bio: "Scientific associate researcher with a PhD, MA, and BEng specializing in Indigenous-led research, participatory approaches, and health equity. Leads content architecture, instructional design, and culturally grounded frameworks across all projects.",
+    bio: "Leads content architecture, instructional design, and CMS training across all projects. Brings a research background in health equity and participatory design to ensure every deliverable is culturally grounded and community-informed.",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663407421710/CU5JQUQHP3FutNoS5xA4np/marisol-navarrete_4717efd6.png",
   },
   {
