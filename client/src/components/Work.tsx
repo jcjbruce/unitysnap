@@ -21,14 +21,14 @@ const projects = [
     featured: true,
   },
   {
-    name: "UnitySnap",
-    sector: "Education & Institutional Media",
-    descriptor: "Curriculum-aligned animation studio",
+    name: "Kinship AI",
+    sector: "Health Equity & AI Research",
+    descriptor: "Indigenous-led health AI research hub",
     summary:
-      "A digital production platform serving schools, universities, and public institutions with accessible, standards-compliant educational media.",
-    image: "/portfolio/unitysnap-hero.png",
-    url: "https://unitysnap.com",
-    accent: "#a064ff",
+      "A research platform co-designing equitable AI-enabled healthcare systems through Indigenous-led, community-grounded participatory approaches and intercultural collaboration.",
+    image: "/portfolio/kinshipai-hero.png",
+    url: "https://kinshipai.org",
+    accent: "#2dd4a8",
     featured: true,
   },
   {
